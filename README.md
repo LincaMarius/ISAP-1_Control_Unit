@@ -477,4 +477,141 @@ By combining these equations with the previous ones we obtain the following Bool
 -	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
 -	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8
 
+### Adding the JC instruction
+We add the JC instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = JC * T3
+-	LP = (JC * C) * T3
+-	NEXT = JC * T4 + JC * T5 + JC * T6 + JC * T7 + JC * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4
+-	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5 + CMP * T5
+-	EA = OUT * T4 + STA * T4 + CPY * T3
+-	I/O = OUT * T4 + IN * T4
+-	R/W = OUT * T4 + STA * T4
+-	LP = JMP * T3 + (JZ * Z) * T3 + (JC * C) * T3
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8
+
+### Adding the JS instruction
+We add the JS instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = JS * T3
+-	LP = (JS * S) * T3
+-	NEXT = JS * T4 + JS * T5 + JS * T6 + JS * T7 + JS * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4
+-	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5 + CMP * T5
+-	EA = OUT * T4 + STA * T4 + CPY * T3
+-	I/O = OUT * T4 + IN * T4
+-	R/W = OUT * T4 + STA * T4
+-	LP = JMP * T3 + (JZ * Z) * T3 + (JC * C) * T3 + (JS * S) * T3
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8
+
+### Adding the INC instruction
+We add the INC instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EC = INC * T3
+-	LB = INC * T3
+-	SC0 = INC * T3
+-	EU = INC * T4
+-	LAH = INC * T4
+-	LAL = INC * T4
+-	NEXT = INC * T5 + INC * T6 + INC * T7 + INC * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + INC * T4
+-	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3 + INC * T3
+-	EU = ADD * T5 + SUB * T5 + INC * T4
+-	SU = SUB * T5 + CMP * T5
+-	EA = OUT * T4 + STA * T4 + CPY * T3
+-	I/O = OUT * T4 + IN * T4
+-	R/W = OUT * T4 + STA * T4
+-	LP = JMP * T3 + (JZ * Z) * T3 + (JC * C) * T3 + (JS * S) * T3
+-	EC = INC * T3
+-	SC1 = INC * T3
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8
+
+### Adding the DEC instruction
+We add the DEC instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EC = DEC * T3
+-	LB = DEC * T3
+-	SC0 = DEC * T3
+-	EU = DEC * T4
+-	LAH = DEC * T4
+-	LAL = DEC * T4
+-	SU = DEC * T4
+-	NEXT = DEC * T5 + DEC * T6 + DEC * T7 + DEC * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4 + DEC * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + INC * T4 + DEC * T4
+-	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3 + INC * T3 + DEC * T3
+-	EU = ADD * T5 + SUB * T5 + INC * T4 + DEC * T4
+-	SU = SUB * T5 + CMP * T5 + DEC * T4
+-	EA = OUT * T4 + STA * T4 + CPY * T3
+-	I/O = OUT * T4 + IN * T4
+-	R/W = OUT * T4 + STA * T4
+-	LP = JMP * T3 + (JZ * Z) * T3 + (JC * C) * T3 + (JS * S) * T3
+-	EC = INC * T3 + DEC * T3
+-	SC1 = INC * T3 + DEC * T3
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8
+
 
