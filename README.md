@@ -70,6 +70,7 @@ https://github.com/LincaMarius/ISAP-1_Computer_Instruction_Set
 
 from where we will combine all the equations for the instructions we want to implement.
 
+### Adding the NOP instruction
 We start from the NOP instruction equations:
 -	EP = T1
 -	LAR = T1
@@ -82,6 +83,7 @@ The + sign signifies the logical OR operation.
 
 The sign * stands for the logical AND operation.
 
+### Adding the LDA instruction
 We add the LDA instruction that has the following boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
 -	LAR = T1 + LDA * T3
@@ -106,6 +108,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	LAL = LDA * T4
 -	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + NOP * T6 + LDA * T6 + NOP * T7 + LDA * T7 + NOP * T8 + LDA * T8
 
+### Adding the ADD instruction
 We add the ADD instruction that has the following boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
 -	LAR = T1 + ADD * T3
