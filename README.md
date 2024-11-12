@@ -137,6 +137,67 @@ By combining these equations with the previous ones we obtain the following Bool
 -	EU = ADD * T5
 -	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + NOP * T7 + LDA * T7 + ADD * T7 + NOP * T8 + LDA * T8 + ADD * T8
 
+### Adding the SUB instruction
+-	EP = T1
+-	LAR = T1 + SUB * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = SUB * T3
+-	DM = SUB * T4
+-	LB = SUB * T4
+-	EU = SUB * T5
+-	LAH = SUB * T5
+-	LAL = SUB * T5
+-	SU = SUB * T5
+-	NEXT = SUB * T6 + SUB * T7 + SUB * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5
+-	LB = ADD * T4 + SUB * T4
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8
+
+### Adding the OUT instruction
+We add the OUT instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1 + OUT * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = OUT * T3
+-	EA = OUT * T4
+-	I/O = OUT * T4
+-	R/W = OUT * T4
+-	NEXT = OUT * T5 + OUT * T6 + OUT * T7 + OUT * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5
+-	LB = ADD * T4 + SUB * T4
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5
+-	EA = OUT * T4
+-	I/O = OUT * T4
+-	R/W = OUT * T4
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + OUT * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8
+
 
 
 
