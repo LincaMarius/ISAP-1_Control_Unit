@@ -198,6 +198,125 @@ By combining these equations with the previous ones we obtain the following Bool
 -	R/W = OUT * T4
 -	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + OUT * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8
 
+### Adding the HLT instruction
+We add the HLT instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5
+-	LB = ADD * T4 + SUB * T4
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5
+-	EA = OUT * T4
+-	I/O = OUT * T4
+-	R/W = OUT * T4
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + OUT * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8
+
+### Adding the LIL instruction
+We add the LIL instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LIL * T3
+-	LAL = LIL * T3
+-	NEXT = LIL * T4 + LIL * T5 + LIL * T6 + LIL * T7 + LIL * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3
+-	LB = ADD * T4 + SUB * T4
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5
+-	EA = OUT * T4
+-	I/O = OUT * T4
+-	R/W = OUT * T4
+-	HLT = HLT * T3 + HLT * T4 + LIL * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8
+
+### Adding the LIH instruction
+We add the LIH instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LIH * T3
+-	LAH = LIH * T3
+-	NEXT = LIH * T4 + LIH * T5 + LIH * T6 + LIH * T7 + LIH * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3
+-	LB = ADD * T4 + SUB * T4
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5
+-	EA = OUT * T4
+-	I/O = OUT * T4
+-	R/W = OUT * T4
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8
+
+### Adding the IN instruction
+We add the IN instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1 + IN * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = IN * T3
+-	I/O = IN * T4
+-	LAH = IN * T4
+-	LAL = IN * T4
+-	NEXT = IN * T5 + IN * T6 + IN * T7 + IN * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4
+-	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4
+-	LB = ADD * T4 + SUB * T4
+-	EU = ADD * T5 + SUB * T5
+-	SU = SUB * T5
+-	EA = OUT * T4
+-	I/O = OUT * T4 + IN * T4
+-	R/W = OUT * T4
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8
 
 
 
