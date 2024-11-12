@@ -55,4 +55,86 @@ In total, 13 out of 15 possible instructions are implemented.
 
 In total, 6 extended instructions out of 16 possible are implemented.
 
+# Implementation of the Control Unit using Combinational Logic Circuits
+Making a circuit using Combinational Logic means using:
+- You can standard logic
+- Decoders
+- Demultiplexers
+- Multiplexers
+
+## Logical equations
+The first step consists in determining the logic equations for the implemented circuit.
+
+For this purpose we use:
+https://github.com/LincaMarius/ISAP-1_Computer_Instruction_Set
+
+from where we will combine all the equations for the instructions we want to implement.
+
+We start from the NOP instruction equations:
+-	EP = T1
+-	LAR = T1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + NOP * T6 + NOP * T7 + NOP * T8
+
+The + sign signifies the logical OR operation.
+
+The sign * stands for the logical AND operation.
+
+We add the LDA instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1 + LDA * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3
+-	DM = LDA * T4
+-	LAH = LDA * T4
+-	LAL = LDA * T4
+-	NEXT = LDA * T5 + LDA * T6 + LDA * T7 + LDA * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3
+-	DM = LDA * T4
+-	LAH = LDA * T4
+-	LAL = LDA * T4
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + NOP * T6 + LDA * T6 + NOP * T7 + LDA * T7 + NOP * T8 + LDA * T8
+
+We add the ADD instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+-	EP = T1
+-	LAR = T1 + ADD * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = ADD * T3
+-	DM = ADD * T4
+-	LB = ADD * T4
+-	EU = ADD * T5
+-	LAH = ADD * T5
+-	LAL = ADD * T5
+-	NEXT = ADD * T6 + ADD * T7 + ADD * T8
+
+By combining these equations with the previous ones we obtain the following Boolean equations:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3
+-	DM = LDA * T4 + ADD * T4
+-	LAH = LDA * T4 + ADD * T5
+-	LAL = LDA * T4 + ADD * T5
+-	LB = ADD * T4
+-	EU = ADD * T5
+-	NEXT = NOP * T3 + NOP * T4 + NOP * T5 + LDA * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + NOP * T7 + LDA * T7 + ADD * T7 + NOP * T8 + LDA * T8 + ADD * T8
+
+
+
+
 
