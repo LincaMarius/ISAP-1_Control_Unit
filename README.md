@@ -563,7 +563,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
 -	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
 -	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4
--	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + INC * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4
 -	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3 + INC * T3
 -	EU = ADD * T5 + SUB * T5 + INC * T4
 -	SU = SUB * T5 + CMP * T5
@@ -601,7 +601,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
 -	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
 -	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4 + DEC * T4
--	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + INC * T4 + DEC * T4
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + DEC * T4
 -	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3 + INC * T3 + DEC * T3
 -	EU = ADD * T5 + SUB * T5 + INC * T4 + DEC * T4
 -	SU = SUB * T5 + CMP * T5 + DEC * T4
@@ -641,7 +641,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
 -	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
 -	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4 + DEC * T4 + NEG * T4 + NEG * T5
--	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + INC * T4 + DEC * T4 + NEG * T4 + NEG * T5
+-	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + DEC * T4 + NEG * T4 + NEG * T5
 -	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3 + INC * T3 + DEC * T3 + NEG * T3
 -	EU = ADD * T5 + SUB * T5 + INC * T4 + DEC * T4 + NEG * T5
 -	SU = SUB * T5 + CMP * T5 + DEC * T4 + NEG * T5
@@ -653,4 +653,115 @@ By combining these equations with the previous ones we obtain the following Bool
 -	SC1 = INC * T3 + DEC * T3
 -	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
 -	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NEG * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NEG * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8 + NEG * T8
+
+## Optimizing equations
+If we look at the final equations we can easily conclude that we will need many logic gates to implement this circuit.
+
+### Ordering the terms of the equations
+Before doing anything else it is necessary to order the terms that make up the above equations.
+
+I ordered the equations in ascending order of T elements:
+-	EP = T1
+-	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
+-	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
+-	LAH = LIH * T3 + LDA * T4 + IN * T4 + DEC * T4 + NEG * T4 + ADD * T5 + SUB * T5 + NEG * T5
+-	LAL = LIL * T3 + LDA * T4 + IN * T4 + INC * T4 + DEC * T4 + NEG * T4 + ADD * T5 + SUB * T5 + NEG * T5
+-	LB = CPY * T3 + INC * T3 + DEC * T3 + NEG * T3 + ADD * T4 + SUB * T4 + CMP * T4
+-	EU = INC * T4 + DEC * T4 + ADD * T5 + SUB * T5 + NEG * T5
+-	SU = DEC * T4 + SUB * T5 + CMP * T5 + NEG * T5
+-	EA = CPY * T3 + NEG * T3 + OUT * T4 + STA * T4
+-	I/O = OUT * T4 + IN * T4
+-	R/W = OUT * T4 + STA * T4
+-	LP = JMP * T3 + Z * JZ * T3 + C * JC * T3 + S * JS * T3
+-	EC = INC * T3 + DEC * T3 + NEG * T4
+-	SC1 = INC * T3 + DEC * T3
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NEG * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NEG * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8 + NEG * T8
+
+### Finding duplicates
+A first optimization is to find repeating terms. These terms are of the form “LDA * T4” and represent a two-input AND gate.
+
+Once a term has been calculated we can use it in all equations where it appears.
+
+For this purpose we replace the repeating term with a letter of the alphabet wherever this term appears. We repeat this process until we find no more repeating terms.
+
+L3 = LDA * T3
+L4 = LDA * T4
+A3 = ADD * T3
+A4 = ADD * T4
+A5 = ADD * T5
+S3 = SUB * T3
+S4 = SUB * T4
+S5 = SUB * T5
+O3 = OUT * T3
+O4 = OUT * T4
+B3 = IN * T3
+B4 = IN * T4
+K3 = STA * T3
+K4 = STA * T4
+F3 = CMP * T3
+F4 = CMP * T4
+F5 = CMP * T5
+D3 = LIL * T3
+H3 = LIH * T3
+J3 = JMP * T3
+Z3 = JZ * T3
+M3 = JC * T3
+Q3 = JS * T3
+E3 = DEC * T3
+E4 = DEC * T4
+N3 = NEG * T3
+N4 = NEG * T4
+N5 = NEG * T5
+G3 = INC * T3
+G4 = INC * T4
+C3 = CPY * T3
+
+This represents 31 2-input AND gates.
+
+All these control signals are realized by using 18 more logical OR gates with the corresponding number of inputs:
+-	EP = T1
+-	LAR = T1 + L3 + A3 + S3 + O3 + B3 + K3 + F3
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = L3 + A3 + S3 + O3 + D3 + H3 + B3 + J3 + K3 + F3 + Z3 + M3 + Q3
+-	DM = L4 + A4 + S4 + K4 + F4
+-	LAH = H3 + L4 + B4 + E4 + N4 + A5 + S5 + N5
+-	LAL = D3 + L4 + B4 + G4 + E4 + N4 + A5 + S5 + N5
+-	LB = C3 + G3 + E3 + Q3 + A4 + S4 + F4
+-	EU = G4 + E4 + A5 + S5 + N5
+-	SU = E4 + S5 + F5 + N5
+-	EA = C3 + Q3 + O4 + K4
+-	I/O = O4 + B4
+-	R/W = O4 + K4
+-	LP = J3 + Z * Z3 + C * M3 + S * Q3
+-	EC = G3 + E3 + N4
+-	SC1 = G3 + E3
+
+The implementation of the HLT signal requires 6 of 2-input AND gates and a 5-input OR gate:
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+
+This equation can also be written as:
+-	HLT = HLT * (T3 + T4 + T5 + T6 + T7 + T8)
+
+So we can also use a 5-input OR gate and a single AND two-input gate for implementation.
+
+To implement the NEXT control signal according to the resulting equation:
+-	NEXT = (NOP * T3) + (NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4) + (NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5) + (NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NEG * T6) + (NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NEG * T7) + (NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8 + NEG * T8)
+
+We will need 77 x 2-input AND logic gates, a 14-input OR gate, a 8-input OR gate, 3 x 18-input OR gates, and a 6-input OR gate. total 83 gates.
+
+If we optimize the equation, the new equation results:
+-	NEXT = (NOP * T3) + (T4 * (NOP + LIL + LIH + JMP + CPY + JZ + JC + JS)) + (T5* (NOP + LDA + OUT + LIL + LIH + IN + JMP + STA + CPY + JZ + JC + JS + INC + DEC)) + (T6* (NOP + LDA + ADD + SUB + OUT + LIL + LIH + IN + JMP + STA + CMP + CPY + JZ + JC + JS + INC + DEC + NEG)) + (T7 * (NOP + LDA + ADD + SUB + OUT + LIL + LIH + IN + JMP + STA + CMP + CPY + JZ + JC + JS + INC + DEC + NEG)) + ( T8 * (NOP + LDA + ADD + SUB + OUT + LIL + LIH + IN + JMP + STA + CMP + CPY + JZ + JC + JS + INC + DEC + NEG))
+
+We will need 6 x 2-input AND logic gates, a 14-input OR gate, a 8-input OR gate, 3 x 18-input OR gates, and a 6-input OR gate. total 12 gates.
+
+One can reduce the number of logic gates required by enabling the NEXT control signal only one step.
+We will have the following equation:
+-	NEXT = (NOP * T3) + (LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4) + (LDA * T5 + OUT * T5 + IN * T5 + STA * T5 + INC * T5 + DEC * T5) + (ADD * T6 + SUB * T6 + CMP * T6 + NEG * T6)
 
