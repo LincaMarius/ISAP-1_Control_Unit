@@ -682,7 +682,7 @@ I ordered the equations in ascending order of T elements:
 -	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
 -	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NEG * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NEG * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8 + NEG * T8
 
-### Finding duplicates
+### Finding duplicate AND gates
 A first optimization is to find repeating terms. These terms are of the form “LDA * T4” and represent a two-input AND gate.
 
 Once a term has been calculated we can use it in all equations where it appears.
@@ -723,7 +723,7 @@ C3 = CPY * T3
 
 This represents 31 2-input AND gates.
 
-All these control signals are realized by using 18 more logical OR gates with the corresponding number of inputs:
+If we replace new terms created in the above equations we get:
 -	EP = T1
 -	LAR = T1 + L3 + A3 + S3 + O3 + B3 + K3 + F3
 -	PM = T2
@@ -754,7 +754,55 @@ You will need:
 - 1 OR gate with 9 inputs
 - 1 OR gate with 13 inputs
 
-A total of 48 logic gates are required.
+A total of 31 + 17 = 48 logic gates are required.
+
+### Minimizing the number of OR gates
+As we did previously, we will look for groups of terms that appear in multiple equations and assign them a name.
+
+W0 = G3 + E3
+K0 = O4 + K4
+Y0 = E4 + S5 + N5
+R0 = C3 + Q3
+P0 = G4 + A5
+W1 = A4 + S4 + F4
+K1 = L4 + B4 + N4
+Y1 = L3 + A3 + S3 + O3 + B3 + K3 + F3
+Y2 = Y0 + K1
+
+You will need:
+- 5 OR gates with 2 inputs
+- 3 OR gate with 3 inputs
+- 1 OR gate with 7 inputs
+
+A total of 9 logic gates are required.
+
+-	EP = T1
+-	LAR = T1 + Y1
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = Y1 + F3 + Z3 + M3 + Q3 + D3 + H3 + J3
+-	DM = L4 + W1 + K4
+-	LAH = Y2 + H3 + A5
+-	LAL = Y2 + D3 + P0
+-	LB = R0 + W0 + W1
+-	EU = Y0 + P0
+-	SU = Y0 + F5
+-	EA = R0 + K0
+-	I/O = O4 + B4
+-	R/W = K0
+-	LP = J3 + Z * Z3 + C * M3 + S * Q3
+-	EC = W0 + N4
+-	SC1 = W0
+
+You will need:
+- 3 AND gates with 2 inputs
+- 6 OR gates with 2 inputs
+- 4 OR gate with 3 inputS
+- 1 OR gates with 4 inputs
+- 1 OR gates with 8 inputs 1
+
+A total of 15 + 31 = 46 logic gates are required.
 
 ### Implementation optimization
 We will start from the previous equations where we will give common factor steps T.
@@ -787,6 +835,56 @@ You will need:
 - 1 OR gate with 13 inputs
 
 A total of 43 logic gates are required.
+
+### Minimizing the number of OR gates
+As we did previously, we will look for groups of terms that appear in multiple equations and assign them a name.
+
+S0 = ADD + SUB
+W0 = LDA + S0 + STA + CMP
+K0 = OUT + IN
+L0 = INC + DEC
+M0 = OUT + STA
+R0 = S0 + NEG
+A0 = LDA + NEG
+B0 = CPY + NEG
+C0 = W0 + K0
+D0 = A0 + IN
+
+You will need:
+- 9 OR gates with 2 inputs
+- 1 OR gates with 4 inputs
+
+A total of 10 logic gates are required.
+
+-	EP = T1
+-	LAR = T1 + T3 * C0
+-	PM = T2
+-	LI = T2
+-	CP = T2
+-	EI = T3 * (C0 + LIL + LIH + JMP + JZ + JC + JS)
+-	DM = T4 * W0
+-	LAH = LIH * T3 + T4 * (D0 + DEC) + T5 * R0
+-	LAL = LIL * T3 + T4 * (D0 + L0) + T5 * R0
+-	LB = T3 * (B0 + L0) + T4 * (S0 + CMP)
+-	EU = T4 * L0 + T5 * R0
+-	SU = DEC * T4 + T5 * (SUB + CMP + NEG)
+-	EA = T3 * B0 + T4 * M0
+-	I/O = T4 * K0
+-	R/W = T4 * M0
+-	LP = T3 * (JMP + Z * JZ + C * JC + S * JS)
+-	EC = T3 * L0 + NEG * T4
+-	SC1 = T3 * L0
+
+You will need:
+- 26 AND gates with 2 inputs 1 1 1 1 1 1 3 2 2 2 2 3 4 2
+- 10 OR gates with 2 inputs 1 1 1 3 1 1 1 1
+- 3 OR gate with 3 inputs 1 1 1
+- 1 OR gates with 4 inputs 1
+- 1 OR gate with 7 inputs 1
+
+A total of 41 + 10 = 51 logic gates are required.
+
+So the previous version is superior.
 
 ### The implementation of the HLT signal
 The implementation of the HLT signal: 
