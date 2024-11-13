@@ -723,7 +723,7 @@ C3 = CPY * T3
 
 This represents 31 2-input AND gates.
 
-If we replace new terms created in the above equations we get:
+If we replace new created terms in the above equations we get:
 -	EP = T1
 -	LAR = T1 + L3 + A3 + S3 + O3 + B3 + K3 + F3
 -	PM = T2
@@ -733,10 +733,10 @@ If we replace new terms created in the above equations we get:
 -	DM = L4 + A4 + S4 + K4 + F4
 -	LAH = H3 + L4 + B4 + E4 + N4 + A5 + S5 + N5
 -	LAL = D3 + L4 + B4 + G4 + E4 + N4 + A5 + S5 + N5
--	LB = C3 + G3 + E3 + Q3 + A4 + S4 + F4
+-	LB = C3 + G3 + E3 + N3 + A4 + S4 + F4
 -	EU = G4 + E4 + A5 + S5 + N5
 -	SU = E4 + S5 + F5 + N5
--	EA = C3 + Q3 + O4 + K4
+-	EA = C3 + N3 + O4 + K4
 -	I/O = O4 + B4
 -	R/W = O4 + K4
 -	LP = J3 + Z * Z3 + C * M3 + S * Q3
@@ -754,20 +754,24 @@ You will need:
 - 1 OR gate with 9 inputs
 - 1 OR gate with 13 inputs
 
-A total of 31 + 17 = 48 logic gates are required.
+A total of 17 + 31 = 48 logic gates are required. 
+
+This is version 1 of the implementation.
+
+implementation of HLT and NEXT signals will be treated separately
 
 ### Minimizing the number of OR gates
 As we did previously, we will look for groups of terms that appear in multiple equations and assign them a name.
 
-W0 = G3 + E3
-K0 = O4 + K4
-Y0 = E4 + S5 + N5
-R0 = C3 + Q3
-P0 = G4 + A5
-W1 = A4 + S4 + F4
-K1 = L4 + B4 + N4
-Y1 = L3 + A3 + S3 + O3 + B3 + K3 + F3
+W0 = G3 + E3\
+K0 = O4 + K4\
+Y0 = E4 + S5 + N5\
+P0 = G4 + A5\
+W1 = A4 + S4 + F4\
+K1 = L4 + B4 + N4\
+Y1 = L3 + A3 + S3 + O3 + B3 + K3 + F3\
 Y2 = Y0 + K1
+P1 = C3 + N3
 
 You will need:
 - 5 OR gates with 2 inputs
@@ -776,19 +780,20 @@ You will need:
 
 A total of 9 logic gates are required.
 
+If we replace new terms created in the above equations we get:
 -	EP = T1
 -	LAR = T1 + Y1
 -	PM = T2
 -	LI = T2
 -	CP = T2
--	EI = Y1 + F3 + Z3 + M3 + Q3 + D3 + H3 + J3
+-	EI = Y1 + D3 + H3 + J3 + Z3 + M3 + Q3
 -	DM = L4 + W1 + K4
 -	LAH = Y2 + H3 + A5
 -	LAL = Y2 + D3 + P0
--	LB = R0 + W0 + W1
+-	LB = P1 + W0 + W1
 -	EU = Y0 + P0
 -	SU = Y0 + F5
--	EA = R0 + K0
+-	EA = P1 + K0
 -	I/O = O4 + B4
 -	R/W = K0
 -	LP = J3 + Z * Z3 + C * M3 + S * Q3
@@ -800,9 +805,11 @@ You will need:
 - 6 OR gates with 2 inputs
 - 4 OR gate with 3 inputS
 - 1 OR gates with 4 inputs
-- 1 OR gates with 8 inputs 1
+- 1 OR gates with 7 inputs
 
-A total of 15 + 31 = 46 logic gates are required.
+A total of 15 + 9 + 31 = 55 logic gates are required.
+
+This is version 2 of the implementation.
 
 ### Implementation optimization
 We will start from the previous equations where we will give common factor steps T.
@@ -835,6 +842,8 @@ You will need:
 - 1 OR gate with 13 inputs
 
 A total of 43 logic gates are required.
+
+This is version 3 of the implementation.
 
 ### Minimizing the number of OR gates
 As we did previously, we will look for groups of terms that appear in multiple equations and assign them a name.
@@ -876,13 +885,15 @@ A total of 10 logic gates are required.
 -	SC1 = T3 * L0
 
 You will need:
-- 26 AND gates with 2 inputs 1 1 1 1 1 1 3 2 2 2 2 3 4 2
-- 10 OR gates with 2 inputs 1 1 1 3 1 1 1 1
-- 3 OR gate with 3 inputs 1 1 1
-- 1 OR gates with 4 inputs 1
-- 1 OR gate with 7 inputs 1
+- 26 AND gates with 2 inputs
+- 10 OR gates with 2 inputs
+- 3 OR gate with 3 inputs
+- 1 OR gates with 4 inputs
+- 1 OR gate with 7 inputs
 
 A total of 41 + 10 = 51 logic gates are required.
+
+This is version 4 of the implementation.
 
 So the previous version is superior.
 
@@ -894,6 +905,8 @@ requires:
 - 6 AND gates with 2 inputs
 - 1 OR gate with 6 inputs
 
+This is version 1 of the implementation.
+
 This equation can also be written as:
 -	HLT = HLT * (T3 + T4 + T5 + T6 + T7 + T8)
 
@@ -901,11 +914,15 @@ requires:
 - 1 AND gates with 2 inputs
 - 1 OR gate with 6 inputs
 
-the simple variant is:
+This is version 2 of the implementation.
+
+The simplest variant is:
 -	HLT = HLT * T3
 
 requires:
 - 1 AND gates with 2 inputs
+
+This is version 3 of the implementation.
 
 ### The implementation of the NEXT signal
 To implement the NEXT control signal according to the resulting equation:
@@ -920,6 +937,8 @@ We will need:
 
 A total of 83 logic gates are required.
 
+This is version 1 of the implementation.
+
 If we optimize the equation, the new equation results:
 -	NEXT = (NOP * T3) + (T4 * (NOP + LIL + LIH + JMP + CPY + JZ + JC + JS)) + (T5* (NOP + LDA + OUT + LIL + LIH + IN + JMP + STA + CPY + JZ + JC + JS + INC + DEC)) + (T6* (NOP + LDA + ADD + SUB + OUT + LIL + LIH + IN + JMP + STA + CMP + CPY + JZ + JC + JS + INC + DEC + NEG)) + (T7 * (NOP + LDA + ADD + SUB + OUT + LIL + LIH + IN + JMP + STA + CMP + CPY + JZ + JC + JS + INC + DEC + NEG)) + ( T8 * (NOP + LDA + ADD + SUB + OUT + LIL + LIH + IN + JMP + STA + CMP + CPY + JZ + JC + JS + INC + DEC + NEG))
 
@@ -932,6 +951,8 @@ We will need:
 
 A total of 12 logic gates are required.
 
+This is version 2 of the implementation.
+
 ### The SIMPLIFIED implementation of the NEXT signal
 One can reduce the number of logic gates required by enabling the NEXT control signal only one step.
 We will have the following equation:
@@ -943,7 +964,11 @@ in this form we will need:
 - 1 OR gates with 7 inputs
 - 2 OR gates with 4 inputs
 
-Această ecuație se poate scrie astfel:
+A total of 22 logic gates are required.
+
+This is version 3 of the implementation.
+
+This equation can be written as:
 -	NEXT = (NOP * T3) + T4 * (LIL + LIH + JMP + CPY + JZ + JC + JS) + T5 * (LDA + OUT + IN + STA + INC + DEC) + T6 * (ADD + SUB + CMP + NEG)
 
 in this form we will need:
@@ -951,3 +976,7 @@ in this form we will need:
 - 1 OR gates with 6 inputs
 - 1 OR gates with 7 inputs
 - 2 OR gates with 4 inputs
+
+A total of 8 logic gates are required.
+
+This is version 4 of the implementation.
