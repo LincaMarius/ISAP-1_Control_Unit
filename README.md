@@ -55,6 +55,28 @@ In total, 13 out of 15 possible instructions are implemented.
 
 In total, 6 extended instructions out of 16 possible are implemented.
 
+## Decoding the instruction
+The format of the ISAP-1 computer instructions is:
+
+| 4 bits instruction code   | 4 bits operand (memory address)          |
+|---------------------------|------------------------------------------|
+
+The format of the extended instructions for the ISAP-1 computer has the following form:
+
+| extended instruction prefix 4 bits (0xF) | extended instruction code 4 bits |
+|------------------------------------------|----------------------------------|
+
+The decoder works according to the following principle:
+- If the upper nibble is different from the binary value 1111, then the upper nibble is decoded.
+- If the upper nibble has the binary value 1111, then the lower nibble is passed to the instruction decoder.
+
+Determining whether the value of the upper nibble is 1111 in binary is done using a 4-input AND gate that generates the EXT signal.
+
+Its output drives a 4-bit two-state multiplexer, which transmits the upper nibble if the EXT signal is low or the lower nibble if the EXT signal is high to the decoder.
+
+
+
+
 # Implementation of the Control Unit using Combinational Logic Circuits
 Making a circuit using Combinational Logic means using:
 - You can standard logic
@@ -689,37 +711,39 @@ Once a term has been calculated we can use it in all equations where it appears.
 
 For this purpose we replace the repeating term with a letter of the alphabet wherever this term appears. We repeat this process until we find no more repeating terms.
 
-L3 = LDA * T3\
-L4 = LDA * T4\
-A3 = ADD * T3\
+L3 = LDA * T3 \
+A3 = ADD * T3 \
+S3 = SUB * T3 \
+O3 = OUT * T3 \
+B3 = IN * T3 \
+K3 = STA * T3 \
+F3 = CMP * T3 \
+D3 = LIL * T3 \
+H3 = LIH * T3 \
+J3 = JMP * T3 \
+Z3 = JZ * T3 \
+M3 = JC * T3 \
+Q3 = JS * T3 \
+E3 = DEC * T3 \
+N3 = NEG * T3 \
+G3 = INC * T3 \
+C3 = CPY * T3 \
+
+L4 = LDA * T4 \
 A4 = ADD * T4\
 A5 = ADD * T5\
-S3 = SUB * T3\
 S4 = SUB * T4\
 S5 = SUB * T5\
-O3 = OUT * T3\
 O4 = OUT * T4\
-B3 = IN * T3\
 B4 = IN * T4\
-K3 = STA * T3\
 K4 = STA * T4\
-F3 = CMP * T3\
 F4 = CMP * T4\
 F5 = CMP * T5\
-D3 = LIL * T3\
-H3 = LIH * T3\
-J3 = JMP * T3\
-Z3 = JZ * T3\
-M3 = JC * T3\
-Q3 = JS * T3\
-E3 = DEC * T3\
 E4 = DEC * T4\
-N3 = NEG * T3\
 N4 = NEG * T4\
 N5 = NEG * T5\
-G3 = INC * T3\
 G4 = INC * T4\
-C3 = CPY * T3
+
 
 This represents 31 2-input AND gates.
 
