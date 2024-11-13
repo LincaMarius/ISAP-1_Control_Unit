@@ -689,36 +689,36 @@ Once a term has been calculated we can use it in all equations where it appears.
 
 For this purpose we replace the repeating term with a letter of the alphabet wherever this term appears. We repeat this process until we find no more repeating terms.
 
-L3 = LDA * T3
-L4 = LDA * T4
-A3 = ADD * T3
-A4 = ADD * T4
-A5 = ADD * T5
-S3 = SUB * T3
-S4 = SUB * T4
-S5 = SUB * T5
-O3 = OUT * T3
-O4 = OUT * T4
-B3 = IN * T3
-B4 = IN * T4
-K3 = STA * T3
-K4 = STA * T4
-F3 = CMP * T3
-F4 = CMP * T4
-F5 = CMP * T5
-D3 = LIL * T3
-H3 = LIH * T3
-J3 = JMP * T3
-Z3 = JZ * T3
-M3 = JC * T3
-Q3 = JS * T3
-E3 = DEC * T3
-E4 = DEC * T4
-N3 = NEG * T3
-N4 = NEG * T4
-N5 = NEG * T5
-G3 = INC * T3
-G4 = INC * T4
+L3 = LDA * T3\
+L4 = LDA * T4\
+A3 = ADD * T3\
+A4 = ADD * T4\
+A5 = ADD * T5\
+S3 = SUB * T3\
+S4 = SUB * T4\
+S5 = SUB * T5\
+O3 = OUT * T3\
+O4 = OUT * T4\
+B3 = IN * T3\
+B4 = IN * T4\
+K3 = STA * T3\
+K4 = STA * T4\
+F3 = CMP * T3\
+F4 = CMP * T4\
+F5 = CMP * T5\
+D3 = LIL * T3\
+H3 = LIH * T3\
+J3 = JMP * T3\
+Z3 = JZ * T3\
+M3 = JC * T3\
+Q3 = JS * T3\
+E3 = DEC * T3\
+E4 = DEC * T4\
+N3 = NEG * T3\
+N4 = NEG * T4\
+N5 = NEG * T5\
+G3 = INC * T3\
+G4 = INC * T4\
 C3 = CPY * T3
 
 This represents 31 2-input AND gates.
@@ -742,6 +742,21 @@ All these control signals are realized by using 18 more logical OR gates with th
 -	LP = J3 + Z * Z3 + C * M3 + S * Q3
 -	EC = G3 + E3 + N4
 -	SC1 = G3 + E3
+
+You will need:
+- 3 AND gates with 2 inputs
+- 3 OR gates with 2 inputs
+- 1 OR gate with 3 inputs
+- 3 OR gates with 4 inputs
+- 2 OR gates with 5 inputs
+- 1 OR gate with 7 inputs
+- 2 OR gates with 8 inputs
+- 1 OR gate with 9 inputs
+- 1 OR gate with 13 inputs
+
+
+
+
 
 The implementation of the HLT signal requires 6 of 2-input AND gates and a 5-input OR gate:
 -	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
