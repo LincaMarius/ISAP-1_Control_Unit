@@ -78,6 +78,12 @@ The diagram of the described circuit made in the Logisim program is presented in
 
 ![ Figure 1 ](/Pictures/Figure1.png)
 
+The actual decoding of the instruction is done using a 32-bit decoder. 
+
+The 4 bits that encode the instruction plus the EXT signal for encoding extended instructions are connected to the decoder's selection pins, which activate output pins O16 – O31.
+
+
+
 # Implementation of the Control Unit using Combinational Logic Circuits
 Making a circuit using Combinational Logic means using:
 - You can standard logic
