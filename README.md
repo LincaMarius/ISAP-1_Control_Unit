@@ -74,8 +74,9 @@ Determining whether the value of the upper nibble is 1111 in binary is done usin
 
 Its output drives a 4-bit two-state multiplexer, which transmits the upper nibble if the EXT signal is low or the lower nibble if the EXT signal is high to the decoder.
 
+The diagram of the described circuit made in the Logisim program is presented in figure 1.
 
-
+![ Figure 1 ](/Pictures/Figure1.png)
 
 # Implementation of the Control Unit using Combinational Logic Circuits
 Making a circuit using Combinational Logic means using:
