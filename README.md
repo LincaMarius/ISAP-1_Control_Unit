@@ -848,15 +848,15 @@ This is version 3 of the implementation.
 ### Minimizing the number of OR gates
 As we did previously, we will look for groups of terms that appear in multiple equations and assign them a name.
 
-S0 = ADD + SUB
-W0 = LDA + S0 + STA + CMP
-K0 = OUT + IN
-L0 = INC + DEC
-M0 = OUT + STA
-R0 = S0 + NEG
-A0 = LDA + NEG
-B0 = CPY + NEG
-C0 = W0 + K0
+S0 = ADD + SUB \
+W0 = LDA + S0 + STA + CMP \
+K0 = OUT + IN \
+L0 = INC + DEC \
+M0 = OUT + STA \
+R0 = S0 + NEG \
+A0 = LDA + NEG \
+B0 = CPY + NEG \
+C0 = W0 + K0 \
 D0 = A0 + IN
 
 You will need:
@@ -980,3 +980,11 @@ in this form we will need:
 A total of 8 logic gates are required.
 
 This is version 4 of the implementation.
+
+## Simulation in Logisim
+For the implementation and simulation in the Logisim program I will use:
+- Version 3 for the control matrix
+- Version 3 for HLT signal generation
+- Version 4 for NEXT signal generation
+
+
