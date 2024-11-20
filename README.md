@@ -110,6 +110,10 @@ As a result, it is necessary to invert the outputs of the NAND gates to obtain t
 
 A better option is to use 4-input AND gates like the 74LS21. This way you don't need the C35 chip.
 
+I made the original version of the Instruction Decoder which is shown in the following figure
+
+![ Figure 2 ](/Pictures/Figure2.png)
+
 ### Step Counter
 For a computer to execute an instruction, it needs several steps. This is also the case for the SAP-1 computer, which needs 6 steps to execute the longest instructions.
 
@@ -117,7 +121,7 @@ For this purpose, a Step Counter is needed. The authors of the SAP-1 Computer us
 
 The diagram of the described circuit made in the Logisim program is presented in figure 2.
 
-![ Figure 2 ](/Pictures/Figure2.png)
+![ Figure 3 ](/Pictures/Figure3.png)
 
 ### Control Matrix
 Implementation of the Control Unit using Combinational Logic Circuits
