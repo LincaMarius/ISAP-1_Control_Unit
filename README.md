@@ -311,7 +311,9 @@ I will separate all terms containing the (*) sign which represents a two-input A
 
 Each parenthesis represents an AND gate. Now each signal represents the output of an OR gate with two or more inputs. If we have a single (+) sign we have a 2-input OR gate. For each (+) sign, one more input is added.
 
+The result is the following Control Matrix that uses 19 AND gates with 2 inputs, 2 OR gates with 4 inputs, 2 OR gates with 3 inputs and 2 OR gates with 2 inputs, a total of 25 logic gates.
 
+![ Figure 4 ](/Pictures/Figure4.png)
 
 
 ### Finding duplicate AND gates
