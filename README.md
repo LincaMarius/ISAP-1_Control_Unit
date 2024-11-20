@@ -88,18 +88,17 @@ We need a four-input AND gate, and we will use the Truth Table for a four-input 
 
 ![ Table 3 ](/Tables/Table3.png)
 
+From Table 3 it can be seen that to obtain a logical one at the output, all inputs must be logical ones.
 
+But for the LDA instruction all the inputs will be logical zero. The solution is to invert all those inputs that are zero, and the inputs that are ones are not inverted.
 
+Now we will extract from the table the Functions that control the outputs of the Decoder according to the inputs to the Decoder. We apply the rule that for each input that has a zero, that input is inverted, and inputs that have a one are not inverted.
 
-
-
-The decoder works according to the following principle:
-- If the upper nibble is different from the binary value 1111, then the upper nibble is decoded.
-- If the upper nibble has the binary value 1111, then the lower nibble is passed to the instruction decoder.
-
-Determining whether the value of the upper nibble is 1111 in binary is done using a 4-input AND gate that generates the EXT signal.
-
-Its output drives a 4-bit two-state multiplexer, which transmits the upper nibble if the EXT signal is low or the lower nibble if the EXT signal is high to the decoder.
+LDA = /I7 * /I6 * /I5 * /I4
+ADD = /I7 * /I6 * /I5 * I4 
+SUB = /I7 * /I6 * I5 * /I4 
+OUT = I7 * I6 * I5 * /I4
+HLT = I7 * I6 * I5 * I4
 
 The diagram of the described circuit made in the Logisim program is presented in figure 1.
 
