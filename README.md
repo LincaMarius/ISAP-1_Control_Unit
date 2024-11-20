@@ -263,76 +263,52 @@ By combining these equations with the previous ones we obtain the following Bool
 -	I/O = OUT * T4
 -	HLT = HLT * T4 + HLT * T5 + HLT * T6
 
-
-
-
-### Adding the NEG instruction
-We add the NEG instruction that has the following boolean equations for the signals that are active when this instruction is executed:
--	EP = T1
--	LAR = T1
--	PM = T2
--	LI = T2
--	CP = T2
--	EA = NEG * T3
--	LB = NEG * T3
--	EC = NEG * T4
--	LAH = NEG * T4
--	LAL = NEG * T4
--	EU = NEG * T5
--	LAH = NEG * T5
--	LAL = NEG * T5
--	SU = NEG * T5
--	NEXT = NEG * T6 + NEG * T7 + NEG * T8
-
-By combining these equations with the previous ones we obtain the following Boolean equations:
--	EP = T1
--	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
--	PM = T2
--	LI = T2
--	CP = T2
--	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
--	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
--	LAH = LDA * T4 + ADD * T5 + SUB * T5 + LIH * T3 + IN * T4 + DEC * T4 + NEG * T4 + NEG * T5
--	LAL = LDA * T4 + ADD * T5 + SUB * T5 + LIL * T3 + IN * T4 + INC * T4 + DEC * T4 + NEG * T4 + NEG * T5
--	LB = ADD * T4 + SUB * T4 + CMP * T4 + CPY * T3 + INC * T3 + DEC * T3 + NEG * T3
--	EU = ADD * T5 + SUB * T5 + INC * T4 + DEC * T4 + NEG * T5
--	SU = SUB * T5 + CMP * T5 + DEC * T4 + NEG * T5
--	EA = OUT * T4 + STA * T4 + CPY * T3 + NEG * T3
--	I/O = OUT * T4 + IN * T4
--	R/W = OUT * T4 + STA * T4
--	LP = JMP * T3 + (JZ * Z) * T3 + (JC * C) * T3 + (JS * S) * T3
--	EC = INC * T3 + DEC * T3 + NEG * T4
--	SC1 = INC * T3 + DEC * T3
--	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
--	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NEG * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NEG * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8 + NEG * T8
-
-## Optimizing equations
+### Optimizing equations
 If we look at the final equations we can easily conclude that we will need many logic gates to implement this circuit.
+
+To obtain the final implementation scheme of the Control Matrix, several steps must be completed.
 
 ### Ordering the terms of the equations
 Before doing anything else it is necessary to order the terms that make up the above equations.
 
 I ordered the equations in ascending order of T elements:
 -	EP = T1
--	LAR = T1 + LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + IN * T3 + STA * T3 + CMP * T3
--	PM = T2
--	LI = T2
+-	LAR = T1 + LDA * T4 + ADD * T4 + SUB * T4
 -	CP = T2
--	EI = LDA * T3 + ADD * T3 + SUB * T3 + OUT * T3 + LIL * T3 + LIH * T3 + IN * T3 + JMP * T3 + STA * T3 + CMP * T3 + JZ * T3 + JC * T3 + JS * T3
--	DM = LDA * T4 + ADD * T4 + SUB * T4 + STA * T4 + CMP * T4
--	LAH = LIH * T3 + LDA * T4 + IN * T4 + DEC * T4 + NEG * T4 + ADD * T5 + SUB * T5 + NEG * T5
--	LAL = LIL * T3 + LDA * T4 + IN * T4 + INC * T4 + DEC * T4 + NEG * T4 + ADD * T5 + SUB * T5 + NEG * T5
--	LB = CPY * T3 + INC * T3 + DEC * T3 + NEG * T3 + ADD * T4 + SUB * T4 + CMP * T4
--	EU = INC * T4 + DEC * T4 + ADD * T5 + SUB * T5 + NEG * T5
--	SU = DEC * T4 + SUB * T5 + CMP * T5 + NEG * T5
--	EA = CPY * T3 + NEG * T3 + OUT * T4 + STA * T4
--	I/O = OUT * T4 + IN * T4
--	R/W = OUT * T4 + STA * T4
--	LP = JMP * T3 + Z * JZ * T3 + C * JC * T3 + S * JS * T3
--	EC = INC * T3 + DEC * T3 + NEG * T4
--	SC1 = INC * T3 + DEC * T3
--	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
--	NEXT = NOP * T3 + NOP * T4 + LIL * T4 + LIH * T4 + JMP * T4 + CPY * T4 + JZ * T4 + JC * T4 + JS * T4 + NOP * T5 + LDA * T5 + OUT * T5 + LIL * T5 + LIH * T5 + IN * T5 + JMP * T5 + STA * T5 + CPY * T5 + JZ * T5 + JC * T5 + JS * T5 + INC * T5 + DEC * T5 + NOP * T6 + LDA * T6 +  ADD * T6 + SUB * T6 + OUT * T6 + LIL * T6 + LIH * T6 + IN * T6 + JMP * T6 + STA * T6 + CMP * T6 + CPY * T6 + JZ * T6 + JC * T6 + JS * T6 + INC * T6 + DEC * T6 + NEG * T6 + NOP * T7 + LDA * T7 + ADD * T7 + SUB * T7 + OUT * T7 + LIL * T7 + LIH * T7 + IN * T7 + JMP * T7 + STA * T7 + CMP * T7 + CPY * T7 + JZ * T7 + JC * T7 + JS * T7 + INC * T7 + DEC * T7 + NEG * T7 + NOP * T8 + LDA * T8 + ADD * T8 + SUB * T8 + OUT * T8 + LIL * T8 + LIH * T8 + IN * T8 + JMP * T8 + STA * T8 + CMP * T8 + CPY * T8 + JZ * T8 + JC * T8 + JS * T8 + INC * T8 + DEC * T8 + NEG * T8
+-	PM = T3 + LDA * T5 + ADD * T5 + SUB * T5
+-	LI = T3
+-	EI = LDA * T4 + ADD * T4 + SUB * T4
+-	LB = ADD * T5 + SUB * T5
+-	EU = ADD * T6 + SUB * T6
+-	LA = LDA * T5 + ADD * T6 + SUB * T6
+-	SU = SUB * T6
+-	EA = OUT * T4
+-	I/O = OUT * T4
+-	HLT = HLT * T4 + HLT * T5 + HLT * T6
+
+The authors of the SAP-1 computer used the HLT signal to inhibit the clock signal, so it does not need to be processed further because it is not an input to the Control Matrix.
+
+From these equations, the Control Matrix can be implemented.
+
+I will separate all terms containing the (*) sign which represents a two-input AND gate.
+
+-	EP = T1
+-	LAR = T1 + (LDA * T4) + (ADD * T4) + (SUB * T4)
+-	CP = T2
+-	PM = T3 + (LDA * T5) + (ADD * T5) + (SUB * T5)
+-	LI = T3
+-	EI = (LDA * T4) + (ADD * T4) + (SUB * T4)
+-	LB = (ADD * T5) + (SUB * T5)
+-	EU = (ADD * T6) + (SUB * T6)
+-	LA = (LDA * T5) + (ADD * T6) + (SUB * T6)
+-	SU = (SUB * T6)
+-	EA = (OUT * T4)
+-	I/O = (OUT * T4)
+
+Each parenthesis represents an AND gate. Now each signal represents the output of an OR gate with two or more inputs. If we have a single (+) sign we have a 2-input OR gate. For each (+) sign, one more input is added.
+
+
+
 
 ### Finding duplicate AND gates
 A first optimization is to find repeating terms. These terms are of the form “LDA * T4” and represent a two-input AND gate.
