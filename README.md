@@ -55,7 +55,8 @@ The Control Block receives the upper nibble of the instruction from the Instruct
 These 4 bits represent the instruction encoding. In the original design of the SAP-1 computer, the authors used an instruction decoder.
 
 | Mnemonic | Opcode                 | Bits                                |
-|----------|--------|---------------|-------------------------------------|
+|----------|------------------------|-------------------------------------|
+
 |		   | Binary |I7 |I6 |I5 |I4 |                                     |
 |----------|--------|---|---|---|---|-------------------------------------|
 | LDA      | 0000   | 0 | 0 | 0 | 0 |                                     |
