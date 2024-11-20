@@ -315,86 +315,18 @@ The result is the following Control Matrix that uses 19 AND gates with 2 inputs,
 
 ![ Figure 4 ](/Pictures/Figure4.png)
 
+But this is not identical to that shown in the original schematic of the SAP-1 computer.
 
-### Finding duplicate AND gates
-A first optimization is to find repeating terms. These terms are of the form “LDA * T4” and represent a two-input AND gate.
+The authors used NAND gates instead of AND gates in their implementation. How can we modify the scheme to use NAND gates?
 
-Once a term has been calculated we can use it in all equations where it appears.
+The solution is to use De Morgan's theorems:
 
-For this purpose we replace the repeating term with a letter of the alphabet wherever this term appears. We repeat this process until we find no more repeating terms.
-
-L3 = LDA * T3 \
-A3 = ADD * T3 \
-S3 = SUB * T3 \
-O3 = OUT * T3 \
-B3 = IN * T3 \
-K3 = STA * T3 \
-F3 = CMP * T3 \
-D3 = LIL * T3 \
-H3 = LIH * T3 \
-J3 = JMP * T3 \
-Z3 = JZ * T3 \
-M3 = JC * T3 \
-Q3 = JS * T3 \
-E3 = DEC * T3 \
-N3 = NEG * T3 \
-G3 = INC * T3 \
-C3 = CPY * T3 \
-
-L4 = LDA * T4 \
-A4 = ADD * T4\
-A5 = ADD * T5\
-S4 = SUB * T4\
-S5 = SUB * T5\
-O4 = OUT * T4\
-B4 = IN * T4\
-K4 = STA * T4\
-F4 = CMP * T4\
-F5 = CMP * T5\
-E4 = DEC * T4\
-N4 = NEG * T4\
-N5 = NEG * T5\
-G4 = INC * T4\
+![ Figure 5 ](/Pictures/Figure5.png)
 
 
-This represents 31 2-input AND gates.
 
-If we replace new created terms in the above equations we get:
--	EP = T1
--	LAR = T1 + L3 + A3 + S3 + O3 + B3 + K3 + F3
--	PM = T2
--	LI = T2
--	CP = T2
--	EI = L3 + A3 + S3 + O3 + D3 + H3 + B3 + J3 + K3 + F3 + Z3 + M3 + Q3
--	DM = L4 + A4 + S4 + K4 + F4
--	LAH = H3 + L4 + B4 + E4 + N4 + A5 + S5 + N5
--	LAL = D3 + L4 + B4 + G4 + E4 + N4 + A5 + S5 + N5
--	LB = C3 + G3 + E3 + N3 + A4 + S4 + F4
--	EU = G4 + E4 + A5 + S5 + N5
--	SU = E4 + S5 + F5 + N5
--	EA = C3 + N3 + O4 + K4
--	I/O = O4 + B4
--	R/W = O4 + K4
--	LP = J3 + Z * Z3 + C * M3 + S * Q3
--	EC = G3 + E3 + N4
--	SC1 = G3 + E3
 
-You will need:
-- 3 AND gates with 2 inputs
-- 3 OR gates with 2 inputs
-- 1 OR gate with 3 inputs
-- 3 OR gates with 4 inputs
-- 2 OR gates with 5 inputs
-- 1 OR gate with 7 inputs
-- 2 OR gates with 8 inputs
-- 1 OR gate with 9 inputs
-- 1 OR gate with 13 inputs
 
-A total of 17 + 31 = 48 logic gates are required. 
-
-This is version 1 of the implementation.
-
-implementation of HLT and NEXT signals will be treated separately
 
 ### Minimizing the number of OR gates
 As we did previously, we will look for groups of terms that appear in multiple equations and assign them a name.
