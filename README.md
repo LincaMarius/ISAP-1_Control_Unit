@@ -58,6 +58,26 @@ To design this Instruction Decoder we need to create a table in which we have al
 
 ![ Table 1 ](/Tables/Table1.png)
 
+In this table I put all the implemented instructions on the first column. On the second column I put all the possible 4-bit codes. It represents the input to the designed Decoder.
+
+In the next four columns, the values ​​in the binary code of the input instruction are associated with the bits received at the Decoder input.
+
+The last column represents the binary state at the output of the Decoder.
+
+When the input presents a code of an implemented instruction, we want to get one at the output, so in the last column we put one only on the table lines where we have an implemented instruction.
+
+We count in the last column of the table how many ones and how many zeros we have. We have 5 values ​​of ones and 11 values ​​of zeros.
+
+To reduce the number of logic gates used in the implementation, we choose the smaller number, i.e. 5. So, the implemented decoder will output a logical one only for the 5 input codes that correspond in the table with the value 1.
+
+Since we are not interested in zero-valued outputs, we will remove from the table all lines that have zero in the last column position of the table.
+
+The work table now looks like this:
+
+![ Table 2 ](/Tables/Table2.png)
+
+
+
 
 
 
