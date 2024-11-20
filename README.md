@@ -76,6 +76,8 @@ The work table now looks like this:
 
 ![ Table 2 ](/Tables/Table2.png)
 
+Now each line in the table is processed separately.
+
 
 
 
