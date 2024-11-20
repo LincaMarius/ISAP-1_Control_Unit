@@ -45,18 +45,25 @@ We can notice that the instructions 0011, 0100, 0101, 0110, 0111, 1000, 1001, 10
 These codes are treated by the SAP-1 computer as NOP instructions.
 
 ### Decoding the instruction
-
-
-
-The format of the ISAP-1 computer instructions is:
+The format of the SAP-1 Computer instructions is:
 
 | 4 bits instruction code   | 4 bits operand (memory address)          |
 |---------------------------|------------------------------------------|
 
-The format of the extended instructions for the ISAP-1 computer has the following form:
+The Control Block receives the upper nibble of the instruction from the Instruction Register in the form of a group of 4 bits called INSTR.
 
-| extended instruction prefix 4 bits (0xF) | extended instruction code 4 bits |
-|------------------------------------------|----------------------------------|
+These 4 bits represent the instruction encoding. In the original design of the SAP-1 computer, the authors used an instruction decoder.
+
+| Mnemonic | Opcode                 | Bits                                |
+|----------|--------|---------------|-------------------------------------|
+|		   | Binary |I7 |I6 |I5 |I4 |                                     |
+|----------|--------|---|---|---|---|-------------------------------------|
+| LDA      | 0000   | 0 | 0 | 0 | 0 |                                     |
+| ADD      | 0001   | 0 | 0 | 0 | 0 |                                     |
+| SUB      | 0010   | 0 | 0 | 0 | 0 |                                     |
+| OUT      | 1110   | 0 | 0 | 0 | 0 |                                     |
+| HLT      | 1111   | 0 | 0 | 0 | 0 |                                     |
+
 
 The decoder works according to the following principle:
 - If the upper nibble is different from the binary value 1111, then the upper nibble is decoded.
