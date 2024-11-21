@@ -323,8 +323,15 @@ The solution is to use De Morgan's theorems:
 
 ![ Figure 5 ](/Pictures/Figure5.png)
 
+From our equations we have obtained terms of the form (LDA * T4) which represents a two-input AND gate. But we want to use NAND gates instead of AND gates. The solution is to use a NAND gate followed by an inverter, thus preserving the previous function.
 
+![ Figure 6 ](/Pictures/Figure6.png)
 
+The equation in the left term represents the double negation which leads to the cancellation of the negation.
+
+So, the term on the right that is present in each parenthesis in our equations can be replaced with the term on the left side in the figure above.
+
+![ Figure 7 ](/Pictures/Figure7.png)
 
 
 
