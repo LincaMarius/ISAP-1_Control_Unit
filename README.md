@@ -345,3 +345,4 @@ The final schematic is identical to the original SAP-1 computer schematic, excep
 
 ![ Figure 9 ](/Pictures/Figure9.png)
 
+25 logic gates and 5 inverters are required to implement the original Control Block diagram for the SAP-1 computer.
