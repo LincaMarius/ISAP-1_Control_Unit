@@ -427,3 +427,6 @@ The contents of the address ROM are as follows:
 
 The address of the ROM that generates the addresses is connected to the output of the Instruction Register.
 
+The Control Block implementation in the Logisim program is as follows:
+
+![ Figure 10 ](/Pictures/Figure10.png)
