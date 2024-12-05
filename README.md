@@ -424,3 +424,6 @@ The contents of the address ROM are as follows:
 |  1101   |  Dh  |    -    |   1111   |  Fh  |
 |  1110   |  Eh  |   OUT   |   1100   |  Ch  |
 |  1111   |  Fh  |    -    |   1111   |  Fh  |
+
+The address of the ROM that generates the addresses is connected to the output of the Instruction Register.
+
