@@ -19,7 +19,7 @@ https://github.com/LincaMarius/ISAP-1_Logisim
 
 where I build and test the functionality of the ISAP-1 computer using the Logisim program.
 
-## Version 1
+## Revision A Version 1
 
 ### The original format of the SAP-1 computer instructions is:
 
@@ -346,3 +346,54 @@ The final schematic is identical to the original SAP-1 computer schematic, excep
 ![ Figure 9 ](/Pictures/Figure9.png)
 
 25 logic gates and 5 inverters are required to implement the original Control Block diagram for the SAP-1 computer.
+
+## Revision B Version 1
+Revision B is an implementation of the Control Unit using a ROM memory instead of logic gates as we did in the implementation of revision A.
+
+We group all control signals into a control word that the authors of the SAP-1 computer called “CON”
+
+The structure of the CON control word is: CpEp#Lm#CE #Li#Ei#LaEa SuEu#Lb#Lo, where # signals an active low signal.
+
+The idle state in which no output is active is as follows: 0011 1110 0011
+
+In hexadecimal this represents: 0x3E3
+
+Activating a control signal will cause the bit associated with it in the CON control word to be inverted.
+
+The Fetch sequence has three steps:
+- Ep, #Lm
+- Cp
+- #CE, #Li
+
+If we invert the corresponding bits in CON we get:
+- 0x5E3
+- 0xBE3
+- 0x263
+
+To make things easier, we have created the following helpful table:
+
+| Address | Routine | Active signals | Cp | Ep | #Lm | #CE | #Li | #Ei | #La | Ea | Su | Eu | #Lb | #Lo | CON controls |
+|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
+|   -     |     -   |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
+|   0x0   |  Fetch  |  Ep, #Lm       |  0 | 1  |  0  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 5E3   |
+|   0x1   |         |  Cp            |  1 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x BE3   |
+|   0x2   |         |  #CE, #Li      |  0 | 0  |  1  |  0  |  0  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 263   |
+|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
+|   0x3   |   LDA   |  #Lm, #Ei      |  0 | 0  |  0  |  1  |  1  |  0  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 1A3   |
+|   0x4   |         |  #CE, #La      |  0 | 0  |  1  |  0  |  1  |  1  |  0  | 0  | 0  | 0  |  1  |  1  |    0 x 2C3   |     
+|   0x5   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
+|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
+|   0x6   |   ADD   |  #Lm, #Ei      |  0 | 0  |  0  |  1  |  1  |  0  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 1A3   |
+|   0x7   |         |  #CE, #Lb      |  0 | 0  |  1  |  0  |  1  |  1  |  1  | 0  | 0  | 0  |  0  |  1  |    0 x 2E1   |
+|   0x8   |         |  #La, Eu       |  0 | 0  |  1  |  1  |  1  |  1  |  0  | 0  | 0  | 1  |  1  |  1  |    0 x 3C7   |
+|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
+|   0x9   |   SUB   |  #Lm, #Ei      |  0 | 0  |  0  |  1  |  1  |  0  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 1A3   |
+|   0xA   |         |  #CE, #Lb      |  0 | 0  |  1  |  0  |  1  |  1  |  1  | 0  | 0  | 0  |  0  |  1  |    0 x 2E1   |
+|   0xB   |         |  #La, Su, Eu   |  0 | 0  |  1  |  1  |  1  |  1  |  0  | 0  | 1  | 1  |  1  |  1  |    0 x 3CF   |
+|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
+|   0xC   |   OUT   |  Ea, #Lo       |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 1  | 0  | 0  |  1  |  0  |    0 x 3F2   |
+|   0xD   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
+|   0xE   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
+|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
+|   0xF   |    -    |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
+
