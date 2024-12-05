@@ -392,3 +392,35 @@ To make things easier, we have created the following helpful table:
 |   0xE   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
 |   0xF   |    -    |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
 
+We have 16 addresses and a 12-bit word must be stored at each address
+
+So to address 16 memory locations we need 4 address pins
+
+In this table we have microinstructions for the Fetch routine between address 0h and 2h, for the LDA instruction at address 3h to 5h, for the ADD instruction at address 6h to 8h, for the SUB instruction at address 9h to Bh, for the OUT instruction at address Ch to Eh.
+
+For implementation in the book, the authors present us with a diagram marked Figure 10-16 on page 162.
+
+We also need a 4-bit presettable counter and a 16x4 ROM memory.
+
+The address ROM stores the starting address for each routine shown in the previous table.
+
+The contents of the address ROM are as follows:
+
+| Address | hexa | Routine | Contents | hexa |
+|---------|------|---------|----------|------|
+|  0000   |  0h  |   LDA   |   0011   |  3h  |
+|  0001   |  1h  |   ADD   |   0110   |  6h  |
+|  0010   |  2h  |   SUB   |   1001   |  9h  |
+|  0011   |  3h  |    -    |   1111   |  Fh  |
+|  0100   |  4h  |    -    |   1111   |  Fh  |
+|  0101   |  5h  |    -    |   1111   |  Fh  |
+|  0110   |  6h  |    -    |   1111   |  Fh  |
+|  0111   |  7h  |    -    |   1111   |  Fh  |
+|  1000   |  8h  |    -    |   1111   |  Fh  |
+|  1001   |  9h  |    -    |   1111   |  Fh  |
+|  1010   |  Ah  |    -    |   1111   |  Fh  |
+|  1011   |  Bh  |    -    |   1111   |  Fh  |
+|  1100   |  Ch  |    -    |   1111   |  Fh  |
+|  1101   |  Dh  |    -    |   1111   |  Fh  |
+|  1110   |  Eh  |   OUT   |   1100   |  Ch  |
+|  1111   |  Fh  |    -    |   1111   |  Fh  |
