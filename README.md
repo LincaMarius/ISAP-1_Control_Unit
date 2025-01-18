@@ -7,7 +7,7 @@ This is the stage where we designed the Control Unit block of the ISAP-1 compute
 
 By: Lincă Marius Gheorghe.
 
-Pitești, Argeș, România, Europe.
+Pitești, Argeș, Romania, Europe.
 
 https://github.com/LincaMarius
 
@@ -58,7 +58,7 @@ To design this Instruction Decoder we need to create a table in which we have al
 
 ![ Table 1 ](/Tables/Table1.png)
 
-In this table I put all the implemented instructions on the first column. On the second column I put all the possible 4-bit codes. It represents the input to the designed Decoder.
+In this Table I put all the implemented instructions on the first column. On the second column I put all the possible 4-bit codes. It represents the input to the designed Decoder.
 
 In the next four columns, the values ​​in the binary code of the input instruction are associated with the bits received at the Decoder input.
 
@@ -80,7 +80,7 @@ Now each line in the table is processed separately.
 
 For example, the first line for the LDA instruction we observe that if at the input we have the binary code 0000 corresponding to the LDA instruction at the output of the Decoder only the LDA output is active.
 
-Each line in the table from an implementation point of view can be associated with an AND gate if we want an active output up or with an OR gate if we want an active output down.
+Each line in the table from an implementation point of view can be associated with an AND gate if we want an active output High or with an OR gate if we want an active output Low.
 
 In this case, we want the output to be active high so we need to use an AND gate.
 
@@ -104,7 +104,7 @@ The diagram of the described circuit made in the Logisim program is presented in
 
 ![ Figure 1 ](/Pictures/Figure1.png)
 
-In the original scheme, the authors used 5 NAND gates with 4 inputs marked C32, C33 C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
+In the original schematic, the authors used 5 NAND gates with 4 inputs marked C32, C33 C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
 
 As a result, it is necessary to invert the outputs of the NAND gates to obtain the correct output signals. For this purpose, the authors used 4 inverters denoted in the schematic C35 using the 74LS04 integrated circuit.
 
@@ -148,10 +148,6 @@ We start from the NOP instruction equations:
 -	PM = T3
 -	LI = T3
 
-The + sign signifies the logical OR operation.
-
-The sign * stands for the logical AND operation.
-
 ### Adding the LDA instruction
 We add the LDA instruction that has the following boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
@@ -161,6 +157,10 @@ We add the LDA instruction that has the following boolean equations for the sign
 -	LI = T3
 -	EI = LDA * T4
 -	LA = LDA * T5
+
+The + sign signifies the logical OR operation.
+
+The sign * stands for the logical AND operation.
 
 By combining these equations with the previous ones we obtain the following Boolean equations:
 -	EP = T1
@@ -267,6 +267,10 @@ By combining these equations with the previous ones we obtain the following Bool
 -	I/O = OUT * T4
 -	HLT = HLT * T4 + HLT * T5 + HLT * T6
 
+The + sign signifies the logical OR operation.
+
+The sign * stands for the logical AND operation.
+
 ### Optimizing equations
 If we look at the final equations we can easily conclude that we will need many logic gates to implement this circuit.
 
@@ -339,7 +343,7 @@ Our equations now have negative terms added together. De Morgan's first theorem 
 
 ![ Figure 8 ](/Pictures/Figure8.png)
 
-Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use AND gates.
+Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use OR gates.
 
 The final schematic is identical to the original SAP-1 computer schematic, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
 
