@@ -19,7 +19,7 @@ https://github.com/LincaMarius/ISAP-1_Logisim
 
 where I build and test the functionality of the ISAP-1 computer using the Logisim program.
 
-## Revision A Version 1
+## ISAP-1 Model A Version 1
 
 ### The original format of the SAP-1 computer instructions is:
 
@@ -351,94 +351,41 @@ The final schematic is identical to the original SAP-1 computer schematic, excep
 
 25 logic gates and 5 inverters are required to implement the original Control Block diagram for the SAP-1 computer.
 
-## Revision B Version 1
-Revision B is an implementation of the Control Unit using a ROM memory instead of logic gates as we did in the implementation of revision A.
+## ISAP-1 Model A Version 1.1
+In Version 1.1, an improvement is made to the ISAP-1 computer by implementing the Variable Machine Cycle.
 
-We group all control signals into a control word that the authors of the SAP-1 computer called “CON”
+The Instruction Set remains unchanged but the Control Block implementation changes.
 
-The structure of the CON control word is: CpEp#Lm#CE #Li#Ei#LaEa SuEu#Lb#Lo, where # signals an active low signal.
+In the Book on page 163 the authors present a method of improving the SAP-1 Computer by implementing the Variable Machine Cycle.
 
-The idle state in which no output is active is as follows: 0011 1110 0011
+The schematic is shown in Figure 10-17 and consists of 5 inverters and a 12-input NAND gate that generates the #NOP signal when the Control Block output has the NOP instruction encoded in Hexadecimal as 3E3h and a two-input AND gate that resets the Ring Counter when the #NOP or #CLR signal is low. 
 
-In hexadecimal this represents: 0x3E3
+We can note that the SAP-1 Computer schematic is not modified to implement this functionality, only two logic gates are added.
 
-Activating a control signal will cause the bit associated with it in the CON control word to be inverted.
+The original circuit is designed to detect the situation when the control signals have the value 3E3h. In binary this is equal to 001111100011.
 
-The Fetch sequence has three steps:
-- Ep, #Lm
-- Cp
-- #CE, #Li
+Because the control signals used in the simulation performed with Logisim software are all active High, this circuit will not function correctly if implemented as in the original schematic.
 
-If we invert the corresponding bits in CON we get:
-- 0x5E3
-- 0xBE3
-- 0x263
+The control signals in the original scheme have the following active state:
 
-To make things easier, we have created the following helpful table:
+CP | EP | #LM | #CE | #LI | #EI | #LA | EA | SU | EU | #LB | LO
 
-| Address | Routine | Active signals | Cp | Ep | #Lm | #CE | #Li | #Ei | #La | Ea | Su | Eu | #Lb | #Lo | CON controls |
-|---------|---------|----------------|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|--------------|
-|   -     |     -   |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
-|   0x0   |  Fetch  |  Ep, #Lm       |  0 | 1  |  0  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 5E3   |
-|   0x1   |         |  Cp            |  1 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x BE3   |
-|   0x2   |         |  #CE, #Li      |  0 | 0  |  1  |  0  |  0  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 263   |
-|   0x3   |   LDA   |  #Lm, #Ei      |  0 | 0  |  0  |  1  |  1  |  0  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 1A3   |
-|   0x4   |         |  #CE, #La      |  0 | 0  |  1  |  0  |  1  |  1  |  0  | 0  | 0  | 0  |  1  |  1  |    0 x 2C3   |     
-|   0x5   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
-|   0x6   |   ADD   |  #Lm, #Ei      |  0 | 0  |  0  |  1  |  1  |  0  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 1A3   |
-|   0x7   |         |  #CE, #Lb      |  0 | 0  |  1  |  0  |  1  |  1  |  1  | 0  | 0  | 0  |  0  |  1  |    0 x 2E1   |
-|   0x8   |         |  #La, Eu       |  0 | 0  |  1  |  1  |  1  |  1  |  0  | 0  | 0  | 1  |  1  |  1  |    0 x 3C7   |
-|   0x9   |   SUB   |  #Lm, #Ei      |  0 | 0  |  0  |  1  |  1  |  0  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 1A3   |
-|   0xA   |         |  #CE, #Lb      |  0 | 0  |  1  |  0  |  1  |  1  |  1  | 0  | 0  | 0  |  0  |  1  |    0 x 2E1   |
-|   0xB   |         |  #La, Su, Eu   |  0 | 0  |  1  |  1  |  1  |  1  |  0  | 0  | 1  | 1  |  1  |  1  |    0 x 3CF   |
-|   0xC   |   OUT   |  Ea, #Lo       |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 1  | 0  | 0  |  1  |  0  |    0 x 3F2   |
-|   0xD   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
-|   0xE   |         |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
-|   0xF   |    -    |       -        |  0 | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |    0 x 3E3   |
+The control signals to be detected have the values:
 
-We have 16 addresses and a 12-bit word must be stored at each address
+001111100011
 
-So to address 16 memory locations we need 4 address pins
+Since the control signals in the Logisim simulation are all active High, we will invert all the signals that in the original schematic are active Low.
 
-In this table we have microinstructions for the Fetch routine between address 0h and 2h, for the LDA instruction at address 3h to 5h, for the ADD instruction at address 6h to 8h, for the SUB instruction at address 9h to Bh, for the OUT instruction at address Ch to Eh.
+| CP | EP | #LM | #CE | #LI | #EI | #LA | EA | SU | EU | #LB | #LO |
+|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|
+| 0  | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |
+| -  | -  |  x  |  x  |  x  |  x  |  x  | -  | -  | -  |  x  |  x  |
+| 0  | 0  |  0  |  0  |  0  |  0  |  0  | 0  | 0  | 0  |  0  |  0  |
 
-For implementation in the book, the authors present us with a diagram marked Figure 10-16 on page 162.
+Thus, we determined that for the simulation the value 000000000000, therefore 000h, must be determined.
 
-We also need a 4-bit presettable counter and a 16x4 ROM memory.
+In the original scheme we had the condition: \
+if CON = 0x3E3 then #NOP = 0.
 
-The address ROM stores the starting address for each routine shown in the previous table.
-
-The contents of the address ROM are as follows:
-
-| Address | hexa | Routine | Contents | hexa |
-|---------|------|---------|----------|------|
-|  0000   |  0h  |   LDA   |   0011   |  3h  |
-|  0001   |  1h  |   ADD   |   0110   |  6h  |
-|  0010   |  2h  |   SUB   |   1001   |  9h  |
-|  0011   |  3h  |    -    |   1111   |  Fh  |
-|  0100   |  4h  |    -    |   1111   |  Fh  |
-|  0101   |  5h  |    -    |   1111   |  Fh  |
-|  0110   |  6h  |    -    |   1111   |  Fh  |
-|  0111   |  7h  |    -    |   1111   |  Fh  |
-|  1000   |  8h  |    -    |   1111   |  Fh  |
-|  1001   |  9h  |    -    |   1111   |  Fh  |
-|  1010   |  Ah  |    -    |   1111   |  Fh  |
-|  1011   |  Bh  |    -    |   1111   |  Fh  |
-|  1100   |  Ch  |    -    |   1111   |  Fh  |
-|  1101   |  Dh  |    -    |   1111   |  Fh  |
-|  1110   |  Eh  |   OUT   |   1100   |  Ch  |
-|  1111   |  Fh  |    -    |   1111   |  Fh  |
-
-The address of the ROM that generates the addresses is connected to the output of the Instruction Register.
-
-The Control Block implementation in the Logisim program is as follows:
-
-![ Figure 10 ](/Pictures/Figure10.png)
-
-The operation of the ISAP-1 revision B version 1 computer was verified with the new Control Block.
-
-The contents of the ROM for Address generation are: \
-[ AdrROM1 ](/ROMS/AdrROM1)
-
-The contents of the Control ROM are: \
-[ CtrlROM1 ](/ROMS/CtrlROM1)
+In our simulation the condition becomes: \
+if CON = 0x000 then #NOP = 0.
