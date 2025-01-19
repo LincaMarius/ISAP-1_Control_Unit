@@ -389,3 +389,22 @@ if CON = 0x3E3 then #NOP = 0.
 
 In our simulation the condition becomes: \
 if CON = 0x000 then #NOP = 0.
+
+This function can be implemented using a 12-input OR gate.
+
+In the original scheme, the Ring Counter is reset with an active low #CLR signal, so the #NOP signal is also active low.
+
+In Logisim simulation, the Ring Counter is reset with an active high CLR signal, so the generated NOP signal must also be active high.
+
+So, in the case of our simulation the condition becomes: \
+if CON = 0x000 then NOP = 1.
+
+This function can be implemented using a 12-input NOR gate.
+
+The reset signal for the Ring Counter is obtained by using a 2-input OR gate.
+
+The Control Block implementation using the original scheme that implements the Variable Machine Cycle is:
+
+![ Figure 10 ](/Pictures/Figure10.png)
+
+
