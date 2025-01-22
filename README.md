@@ -384,7 +384,7 @@ Since the control signals in the Logisim simulation are all active High, we will
 
 Thus, we determined that for the simulation the value 000000000000, therefore 000h, must be determined.
 
-In the original scheme we had the condition: \
+In the original schematic we had the condition: \
 if CON = 0x3E3 then #NOP = 0.
 
 In our simulation the condition becomes: \
@@ -392,7 +392,7 @@ if CON = 0x000 then #NOP = 0.
 
 This function can be implemented using a 12-input OR gate.
 
-In the original scheme, the Ring Counter is reset with an active low #CLR signal, so the #NOP signal is also active low.
+In the original schematic, the Ring Counter is reset with an active low #CLR signal, so the #NOP signal is also active low.
 
 In Logisim simulation, the Ring Counter is reset with an active high CLR signal, so the generated NOP signal must also be active high.
 
