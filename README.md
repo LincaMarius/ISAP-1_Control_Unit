@@ -490,3 +490,12 @@ The address of the ROM that generates the addresses is connected to the output o
 The Control Block implementation in the Logisim program is as follows:
 
 ![ Figure 11 ](/Pictures/Figure11.png)
+
+The operation of the ISAP-1 revision B version 1 computer was verified with the new Control Block.
+
+The contents of the ROM for Address generation are: \
+[ AdrROM1 ](/ROMS/AdrROM1)
+
+The contents of the Control ROM are: \
+[ CtrlROM1 ](/ROMS/CtrlROM1)
+
