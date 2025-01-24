@@ -442,5 +442,51 @@ To make things easier, I created the following helpful table:
 
 ![ Table 4 ](/Tables/Table4.png)
 
+We have 16 addresses and a 12-bit word must be stored at each address. So, to address 16 memory locations we need 4 address pins
 
+In this table we have microinstructions for the Fetch routine between address 0h and 2h, for the LDA instruction at address 3h to 5h, for the ADD instruction at address 6h to 8h, for the SUB instruction at address 9h to Bh, for the OUT instruction at address Ch to Eh.
 
+For implementation in the book, the authors present us with a diagram marked Figure 10-16 on page 162.
+
+Currently we have the Instruction Set consisting of 5 instructions, the HLT instruction is not implemented in the Control ROM but we have 3 locations for Fetch. In total we need 5 x 3 = 15 memory locations
+
+ROM, PROM, EPROM and EEPROM memories are manufactured with capacities that are calculated with the mathematical relationship: *2^n = Capacity*. The numerical value of the form 2^n closest to 15 is 2^n = 2^4 = 16 bits.
+
+So, we will need a ROM memory with a capacity of 16 x 12 bits for the Control ROM memory.
+
+If we have the complete Instruction Set then there will be 16 x 3 = 48 memory locations used. The numerical value of the form 2^n closest to 48 is 2^n = 2^6 = 64 bits. Then, we will need a ROM memory with a capacity of 64 x 12 bits for the Control ROM memory
+
+In table 4 we have microinstructions for the Fetch routine between address 0h and 2h, for the LDA instruction at address 3h to 5h, for the ADD instruction at address 6h to 8h, for the SUB instruction at address 9h to Bh, for the OUT instruction at address Ch to Eh.
+
+For implementation in the book, the authors present us with a diagram marked Figure 10-16 on page 162.
+
+We also need a 4-bit presettable counter and a 16x4 ROM memory.
+
+The Address ROM stores the starting address for each routine shown in the previous table.
+
+The contents of the Address ROM are as follows:
+
+| Address | hexa | Routine | Contents | hexa |
+|---------|------|---------|----------|------|
+|  0000   |  0h  |   LDA   |   0011   |  3h  |
+|  0001   |  1h  |   ADD   |   0110   |  6h  |
+|  0010   |  2h  |   SUB   |   1001   |  9h  |
+|  0011   |  3h  |    -    |   1111   |  Fh  |
+|  0100   |  4h  |    -    |   1111   |  Fh  |
+|  0101   |  5h  |    -    |   1111   |  Fh  |
+|  0110   |  6h  |    -    |   1111   |  Fh  |
+|  0111   |  7h  |    -    |   1111   |  Fh  |
+|  1000   |  8h  |    -    |   1111   |  Fh  |
+|  1001   |  9h  |    -    |   1111   |  Fh  |
+|  1010   |  Ah  |    -    |   1111   |  Fh  |
+|  1011   |  Bh  |    -    |   1111   |  Fh  |
+|  1100   |  Ch  |    -    |   1111   |  Fh  |
+|  1101   |  Dh  |    -    |   1111   |  Fh  |
+|  1110   |  Eh  |   OUT   |   1100   |  Ch  |
+|  1111   |  Fh  |    -    |   1111   |  Fh  |
+
+The address of the ROM that generates the addresses is connected to the output of the Instruction Register.
+
+The Control Block implementation in the Logisim program is as follows:
+
+![ Figure 11 ](/Pictures/Figure11.png)
