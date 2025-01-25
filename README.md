@@ -491,6 +491,8 @@ The Control Block implementation in the Logisim program is as follows:
 
 ![ Figure 11 ](/Pictures/Figure11.png)
 
+The 8 inverters at the bottom must be used because all the control signals used by the Logisim software are active High compared to the SAP-1 computer schematic where they are mixed.
+
 The operation of the ISAP-1 revision B version 1 computer was verified with the new Control Block.
 
 The contents of the ROM for Address generation are: \
@@ -498,4 +500,17 @@ The contents of the ROM for Address generation are: \
 
 The contents of the Control ROM are: \
 [ CtrlROM1 ](/ROMS/CtrlROM1)
+
+## ISAP-1 Model B Version 1.1
+In the book on page 163 the authors present a method of improving the SAP-1 Computer by implementing the Variable Machine Cycle.
+
+The schematic is shown in Figure 10-17 and consists of 5 inverters and a 12-input NAND gate that generates the #NOP signal when the Control Block output has the NOP instruction encoded in Hexadecimal as 3E3h and a two-input AND gate that resets the Ring Counter when the #NOP or #CLR signal is low. 
+
+The identical implementation of this scheme in the ISAP-1 computer structure is shown in the following figure.
+
+![ Figure 12 ](/Pictures/Figure12.png)
+
+No further changes are required in the simulation structure or schematic.
+
+The functionality of the ISAP-1 Computer revision B version 1.1 has been verified with the new Control Block.
 
