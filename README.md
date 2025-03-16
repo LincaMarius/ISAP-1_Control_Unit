@@ -3,9 +3,9 @@ The ISAP-1 computer is the improved version of the SAP-1 computer made by me.
 
 ISAP Computer stands for Improved Simple as Possible Computer.
 
-This is the stage where we designed the Control Unit block of the ISAP-1 computer.
+This is the stage where I designed the Control Unit block of the ISAP-1 computer.
 
-By: Lincă Marius Gheorghe.
+By: Lincă Marius Gheorghe,
 
 Pitești, Argeș, Romania, Europe.
 
@@ -17,7 +17,7 @@ The goal of this project is to create a more efficient version of the SAP (Simpl
 This project helps build another project I made:
 https://github.com/LincaMarius/ISAP-1_Logisim
 
-where I build and test the functionality of the ISAP-1 computer using the Logisim program.
+where I build and test the functionality of the ISAP-1 computer using the Logisim software.
 
 ## ISAP-1 Model A Version 1
 
@@ -250,7 +250,7 @@ We add the HLT instruction that has the following boolean equations for the sign
 -	PM = T2
 -	LI = T2
 -	CP = T2
--	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6 + HLT * T7 + HLT * T8
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6
 
 By combining these equations with the previous ones we obtain the following Boolean equations:
 -	EP = T1
@@ -265,7 +265,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	SU = SUB * T6
 -	EA = OUT * T4
 -	I/O = OUT * T4
--	HLT = HLT * T4 + HLT * T5 + HLT * T6
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6
 
 The + sign signifies the logical OR operation.
 
@@ -292,7 +292,7 @@ I ordered the equations in ascending order of T elements:
 -	SU = SUB * T6
 -	EA = OUT * T4
 -	I/O = OUT * T4
--	HLT = HLT * T4 + HLT * T5 + HLT * T6
+-	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6
 
 The authors of the SAP-1 computer used the HLT signal to inhibit the clock signal, so it does not need to be processed further because it is not an input to the Control Matrix.
 
@@ -349,7 +349,7 @@ The final schematic is identical to the original SAP-1 computer schematic, excep
 
 ![ Figure 9 ](/Pictures/Figure9.png)
 
-25 logic gates and 5 inverters are required to implement the original Control Block diagram for the SAP-1 computer.
+25 logic gates and 5 inverters are required to implement the original Control Matrix schematic for the SAP-1 computer.
 
 ## ISAP-1 Model A Version 1.1
 In Version 1.1, an improvement is made to the ISAP-1 computer by implementing the Variable Machine Cycle.
