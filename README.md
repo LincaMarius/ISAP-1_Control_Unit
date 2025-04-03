@@ -329,11 +329,11 @@ The result is the following Control Matrix that uses 19 AND gates with 2 inputs,
 
 But this is not identical to that shown in the original schematic of the SAP-1 computer.
 
-The authors used NAND gates instead of AND gates in their implementation. How can we modify the scheme to use NAND gates?
+The authors used NAND gates instead of AND gates in their implementation. How can we modify the schematic to use NAND gates?
 
 The solution is to use De Morgan's theorems:
 
-![ Figure 5 ](/Pictures/Figure5.png)
+![ Figure 6 ](/Pictures/Figure6.png)
 
 From our equations we have obtained terms of the form (LDA * T4) which represents a two-input AND gate. But we want to use NAND gates instead of AND gates. The solution is to use a NAND gate followed by an inverter, thus preserving the previous function.
 
