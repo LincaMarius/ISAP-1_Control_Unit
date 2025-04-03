@@ -156,8 +156,12 @@ We start from the NOP instruction equations:
 -	PM = T3
 -	LI = T3
 
+The “ + ” sign signifies the logical OR operation
+
+The sign “ * ” stands for the logical AND operation
+
 ### Adding the LDA instruction
-We add the LDA instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+We add the LDA instruction that has the following Boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
 -	LAR = T1 + LDA * T4
 -	CP = T2
@@ -165,10 +169,6 @@ We add the LDA instruction that has the following boolean equations for the sign
 -	LI = T3
 -	EI = LDA * T4
 -	LA = LDA * T5
-
-The + sign signifies the logical OR operation.
-
-The sign * stands for the logical AND operation.
 
 By combining these equations with the previous ones we obtain the following Boolean equations:
 -	EP = T1
@@ -180,7 +180,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	LA = LDA * T5
 
 ### Adding the ADD instruction
-We add the ADD instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+We add the ADD instruction that has the following Boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
 -	LAR = T1 + ADD * T4
 -	CP = T2
@@ -203,7 +203,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	LA = LDA * T5 + ADD * T6
 
 ### Adding the SUB instruction
-We add the SUB instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+We add the SUB instruction that has the following Boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
 -	LAR = T1 + SUB * T4
 -	CP = T2
@@ -228,7 +228,7 @@ By combining these equations with the previous ones we obtain the following Bool
 -	SU = SUB * T6
 
 ### Adding the OUT instruction
-We add the OUT instruction that has the following boolean equations for the signals that are active when this instruction is executed:
+We add the OUT instruction that has the following Boolean equations for the signals that are active when this instruction is executed:
 -	EP = T1
 -	LAR = T1
 -	CP = T2
@@ -275,9 +275,9 @@ By combining these equations with the previous ones we obtain the following Bool
 -	I/O = OUT * T4
 -	HLT = HLT * T3 + HLT * T4 + HLT * T5 + HLT * T6
 
-The + sign signifies the logical OR operation.
+The " + " sign signifies the logical OR operation.
 
-The sign * stands for the logical AND operation.
+The sign " * " stands for the logical AND operation.
 
 ### Optimizing equations
 If we look at the final equations we can easily conclude that we will need many logic gates to implement this circuit.
@@ -321,11 +321,11 @@ I will separate all terms containing the (*) sign which represents a two-input A
 -	EA = (OUT * T4)
 -	I/O = (OUT * T4)
 
-Each parenthesis represents an AND gate. Now each signal represents the output of an OR gate with two or more inputs. If we have a single (+) sign we have a 2-input OR gate. For each (+) sign, one more input is added.
+Each pair of parentheses represents an AND gate. Now each signal represents the output of an OR gate with two or more inputs. If we have a single (+) sign we have a 2-input OR gate. For each (+) sign, one more input is added.
 
 The result is the following Control Matrix that uses 19 AND gates with 2 inputs, 2 OR gates with 4 inputs, 2 OR gates with 3 inputs and 2 OR gates with 2 inputs, a total of 25 logic gates.
 
-![ Figure 4 ](/Pictures/Figure4.png)
+![ Figure 5 ](/Pictures/Figure5.png)
 
 But this is not identical to that shown in the original schematic of the SAP-1 computer.
 
