@@ -353,9 +353,9 @@ Our equations now have negative terms added together. De Morgan's first theorem 
 
 Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use OR gates.
 
-The final schematic is identical to the original SAP-1 computer schematic, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
+The final schematic obtained is identical to the original schematic of the SAP-1 computer, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
 
-![ Figure 9 ](/Pictures/Figure9.png)
+![ Figure 10 ](/Pictures/Figure10.png)
 
 25 logic gates and 5 inverters are required to implement the original Control Matrix schematic for the SAP-1 computer.
 
