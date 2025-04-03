@@ -112,7 +112,7 @@ The diagram of the described circuit made in the Logisim program is presented in
 
 ![ Figure 2 ](/Pictures/Figure2.png)
 
-In the original schematic, the authors used 5 NAND gates with 4 inputs marked C32, C33 C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
+In the original schematic, the authors used 5 NAND gates with 4 inputs marked C32, C33, C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
 
 As a result, it is necessary to invert the outputs of the NAND gates to obtain the correct output signals. For this purpose, the authors used 4 inverters denoted in the schematic C35 using the 74LS04 integrated circuit.
 
@@ -120,7 +120,7 @@ A better option is to use 4-input AND gates like the 74LS21. This way you don't 
 
 I made the original version of the Instruction Decoder which is shown in the following figure
 
-![ Figure 2 ](/Pictures/Figure2.png)
+![ Figure 3 ](/Pictures/Figure3.png)
 
 ### Step Counter
 For a computer to execute an instruction, it needs several steps. This is also the case for the SAP-1 computer, which needs 6 steps to execute the longest instructions.
