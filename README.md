@@ -127,9 +127,9 @@ For a computer to execute an instruction, it needs several steps. This is also t
 
 For this purpose, a Step Counter is needed. The authors of the SAP-1 Computer used a Ring Counter to count the steps taken in executing an instruction.
 
-The diagram of the described circuit made in the Logisim program is presented in figure 2.
+The diagram of the described circuit made in the Logisim program is presented in figure 4.
 
-![ Figure 3 ](/Pictures/Figure3.png)
+![ Figure 4 ](/Pictures/Figure4.png)
 
 ### Control Matrix
 Implementation of the Control Unit using Combinational Logic Circuits
