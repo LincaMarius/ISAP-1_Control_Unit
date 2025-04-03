@@ -108,9 +108,9 @@ SUB = /I7 * /I6 * I5 * /I4 \
 OUT = I7 * I6 * I5 * /I4 \
 HLT = I7 * I6 * I5 * I4
 
-The diagram of the described circuit made in the Logisim program is presented in figure 1.
+The diagram of the described circuit made in the Logisim program is presented in figure 2.
 
-![ Figure 1 ](/Pictures/Figure1.png)
+![ Figure 2 ](/Pictures/Figure2.png)
 
 In the original schematic, the authors used 5 NAND gates with 4 inputs marked C32, C33 C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
 
