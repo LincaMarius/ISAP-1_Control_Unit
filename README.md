@@ -349,7 +349,7 @@ If we look at De Morgan's first Theorem we notice that the term on the right is 
 
 Our equations now have negative terms added together. De Morgan's first theorem tells us that we can replace the equations with others where terms are multiplied and everything is negated.
 
-![ Figure 8 ](/Pictures/Figure8.png)
+![ Figure 9 ](/Pictures/Figure9.png)
 
 Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use OR gates.
 
