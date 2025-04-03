@@ -50,6 +50,8 @@ The Control Unit is built from three blocks:
 - Step Counter,
 - Control Matrix.
 
+![ Figure 1 ](/Pictures/Figure1.png)
+
 ### Decoding the instruction
 The format of the SAP-1 Computer instructions is:
 
