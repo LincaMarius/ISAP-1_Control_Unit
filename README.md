@@ -19,9 +19,8 @@ https://github.com/LincaMarius/ISAP-1_Logisim
 
 where I build and test the functionality of the ISAP-1 computer using the Logisim software.
 
-## ISAP-1 Model A Version 1
-
-### The original format of the SAP-1 computer instructions is:
+## ISAP-1 TTL Version 1.0
+The original format of the SAP-1 computer instructions is:
 
 | 4 bits instruction code   | 4 bits operand (memory address)          |
 |---------------------------|------------------------------------------|
@@ -30,7 +29,8 @@ We notice that the upper nibble is used to encode an instruction.
 So, any instruction is encoded on 4 bits. 
 Thus, we can have a maximum of 2 ^ 4 = 16 instructions.
 
-### The original instruction set of the SAP-1 computer is:
+### The SAP-1 Computer Instruction Set
+The original instruction set of the SAP-1 computer is:
 
 | Mnemonic | Opcode | Operation                                  |
 |----------|--------|--------------------------------------------|
@@ -40,9 +40,15 @@ Thus, we can have a maximum of 2 ^ 4 = 16 instructions.
 | OUT      | 1110   | Load Accumulator data into Output Register |
 | HLT      | 1111   | Stop processing                            |
 
-We can notice that the instructions 0011, 0100, 0101, 0110, 0111, 1000, 1001, 1010, 1011, 1100, 1101 are not used. So we can add 11 more new instructions.
+We can see that out of the 16 possible instructions, only 5 are implemented. So, we can add 11 more new instructions.
 
-These codes are treated by the SAP-1 computer as NOP instructions.
+The codes for unimplemented instructions are treated by the SAP-1 computer as NOP instructions.
+
+### Control Unit Structure
+The Control Unit is built from three blocks:
+- Instruction Decoder,
+- Step Counter,
+- Control Matrix.
 
 ### Decoding the instruction
 The format of the SAP-1 Computer instructions is:
