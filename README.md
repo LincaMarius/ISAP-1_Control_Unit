@@ -19,7 +19,7 @@ https://github.com/LincaMarius/ISAP-1_Logisim
 
 where I build and test the functionality of the ISAP-1 computer using the Logisim software.
 
-## ISAP-1 TTL Version 1.0
+## ISAP-1 computer version 1.0
 The original format of the SAP-1 computer instructions is:
 
 | 4 bits instruction code   | 4 bits operand (memory address)          |
@@ -282,7 +282,7 @@ The sign " * " stands for the logical AND operation.
 ### Optimizing equations
 If we look at the final equations we can easily conclude that we will need many logic gates to implement this circuit.
 
-To obtain the final implementation scheme of the Control Matrix, several steps must be completed.
+To obtain the final implementation schematic of the Control Matrix, several steps must be completed.
 
 ### Ordering the terms of the equations
 Before doing anything else it is necessary to order the terms that make up the above equations.
