@@ -5,9 +5,7 @@ ISAP Computer stands for Improved Simple as Possible Computer.
 
 This is the stage where I designed the Control Unit block of the ISAP-1 computer.
 
-By: Lincă Marius Gheorghe,
-
-Pitești, Argeș, Romania, Europe.
+By: Lincă Marius Gheorghe
 
 https://github.com/LincaMarius
 
@@ -15,9 +13,9 @@ https://github.com/LincaMarius
 The goal of this project is to create a more efficient version of the SAP (Simple As Possible) computer, but with minimal changes so that the instruction format remains the same.
 
 This project helps build another project I made:
-https://github.com/LincaMarius/ISAP-1_Logisim
+https://github.com/LincaMarius/ISAP-1_Computer_Project
 
-where I build and test the functionality of the ISAP-1 computer using the Logisim software.
+where I build and test the functionality of the ISAP-1 computer.
 
 ## ISAP-1 computer version 1.0
 The original format of the SAP-1 computer instructions is:
@@ -358,167 +356,3 @@ The final schematic obtained is identical to the original schematic of the SAP-1
 ![ Figure 10 ](/Pictures/Figure10.png)
 
 25 logic gates and 5 inverters are required to implement the original Control Matrix schematic for the SAP-1 computer.
-
-## ISAP-1 Model A Version 1.1
-In Version 1.1, an improvement is made to the ISAP-1 computer by implementing the Variable Machine Cycle.
-
-The Instruction Set remains unchanged but the Control Block implementation changes.
-
-In the Book on page 163 the authors present a method of improving the SAP-1 Computer by implementing the Variable Machine Cycle.
-
-The schematic is shown in Figure 10-17 and consists of 5 inverters and a 12-input NAND gate that generates the #NOP signal when the Control Block output has the NOP instruction encoded in Hexadecimal as 3E3h and a two-input AND gate that resets the Ring Counter when the #NOP or #CLR signal is low. 
-
-We can note that the SAP-1 Computer schematic is not modified to implement this functionality, only two logic gates are added.
-
-The original circuit is designed to detect the situation when the control signals have the value 3E3h. In binary this is equal to 001111100011.
-
-Because the control signals used in the simulation performed with Logisim software are all active High, this circuit will not function correctly if implemented as in the original schematic.
-
-The control signals in the original scheme have the following active state:
-
-CP | EP | #LM | #CE | #LI | #EI | #LA | EA | SU | EU | #LB | LO
-
-The control signals to be detected have the values:
-
-001111100011
-
-Since the control signals in the Logisim simulation are all active High, we will invert all the signals that in the original schematic are active Low.
-
-| CP | EP | #LM | #CE | #LI | #EI | #LA | EA | SU | EU | #LB | #LO |
-|----|----|-----|-----|-----|-----|-----|----|----|----|-----|-----|
-| 0  | 0  |  1  |  1  |  1  |  1  |  1  | 0  | 0  | 0  |  1  |  1  |
-| -  | -  |  x  |  x  |  x  |  x  |  x  | -  | -  | -  |  x  |  x  |
-| 0  | 0  |  0  |  0  |  0  |  0  |  0  | 0  | 0  | 0  |  0  |  0  |
-
-Thus, we determined that for the simulation the value 000000000000, therefore 000h, must be determined.
-
-In the original schematic we had the condition: \
-if CON = 0x3E3 then #NOP = 0.
-
-In our simulation the condition becomes: \
-if CON = 0x000 then #NOP = 0.
-
-This function can be implemented using a 12-input OR gate.
-
-In the original schematic, the Ring Counter is reset with an active low #CLR signal, so the #NOP signal is also active low.
-
-In Logisim simulation, the Ring Counter is reset with an active high CLR signal, so the generated NOP signal must also be active high.
-
-So, in the case of our simulation the condition becomes: \
-if CON = 0x000 then NOP = 1.
-
-This function can be implemented using a 12-input NOR gate.
-
-The reset signal for the Ring Counter is obtained by using a 2-input OR gate.
-
-The Control Block implementation using the original scheme that implements the Variable Machine Cycle is:
-
-![ Figure 10 ](/Pictures/Figure10.png)
-
-## ISAP-1 Model B Version 1.0
-Revision B is an implementation of the Control Unit using a ROM memory instead of logic gates as we did in the implementation of revision A.
-
-Implementing the Control Matrix using logic gates is a good option for a simple computer like the SAP-1 which has a reduced Instruction Set.
-
-For more complex computers with a larger instruction set, the Control Matrix becomes very complicated and requires the use of hundreds of logic gates, making it impractical.
-
-A solution to this problem is the use of Microprogramming and consists of storing microinstructions in a ROM memory, thus keeping the number of chips required to implement the Control Block low.
-
-In the book, the authors present this Control Block implementation solution in Subchapter 10-8 on page 161.
-
-We group all the control signals into a control word that the authors of the SAP-1 computer called "CON", I will call it "CTRL".
-
-The structure of the CON control word is: CpEp#Lm#CE #Li#Ei#LaEa SuEu#Lb#Lo, where # signals an active low.
-
-The idle state in which no output is active is as follows: 0011 1110 0011
-
-In hexadecimal this represents: 0x3E3
-
-Activating a control signal will cause the bit associated with it in the CON control word to be inverted.
-
-The Fetch sequence has three steps:
-- Ep, #Lm
-- Cp
-- #CE, #Li
-
-If we invert the corresponding bits in CON we get:
-- 0x5E3
-- 0xBE3
-- 0x263
-
-To make things easier, I created the following helpful table:
-
-![ Table 4 ](/Tables/Table4.png)
-
-We have 16 addresses and a 12-bit word must be stored at each address. So, to address 16 memory locations we need 4 address pins
-
-In this table we have microinstructions for the Fetch routine between address 0h and 2h, for the LDA instruction at address 3h to 5h, for the ADD instruction at address 6h to 8h, for the SUB instruction at address 9h to Bh, for the OUT instruction at address Ch to Eh.
-
-For implementation in the book, the authors present us with a diagram marked Figure 10-16 on page 162.
-
-Currently we have the Instruction Set consisting of 5 instructions, the HLT instruction is not implemented in the Control ROM but we have 3 locations for Fetch. In total we need 5 x 3 = 15 memory locations
-
-ROM, PROM, EPROM and EEPROM memories are manufactured with capacities that are calculated with the mathematical relationship: *2^n = Capacity*. The numerical value of the form 2^n closest to 15 is 2^n = 2^4 = 16 bits.
-
-So, we will need a ROM memory with a capacity of 16 x 12 bits for the Control ROM memory.
-
-If we have the complete Instruction Set then there will be 16 x 3 = 48 memory locations used. The numerical value of the form 2^n closest to 48 is 2^n = 2^6 = 64 bits. Then, we will need a ROM memory with a capacity of 64 x 12 bits for the Control ROM memory
-
-In table 4 we have microinstructions for the Fetch routine between address 0h and 2h, for the LDA instruction at address 3h to 5h, for the ADD instruction at address 6h to 8h, for the SUB instruction at address 9h to Bh, for the OUT instruction at address Ch to Eh.
-
-For implementation in the book, the authors present us with a diagram marked Figure 10-16 on page 162.
-
-We also need a 4-bit presettable counter and a 16x4 ROM memory.
-
-The Address ROM stores the starting address for each routine shown in the previous table.
-
-The contents of the Address ROM are as follows:
-
-| Address | hexa | Routine | Contents | hexa |
-|---------|------|---------|----------|------|
-|  0000   |  0h  |   LDA   |   0011   |  3h  |
-|  0001   |  1h  |   ADD   |   0110   |  6h  |
-|  0010   |  2h  |   SUB   |   1001   |  9h  |
-|  0011   |  3h  |    -    |   1111   |  Fh  |
-|  0100   |  4h  |    -    |   1111   |  Fh  |
-|  0101   |  5h  |    -    |   1111   |  Fh  |
-|  0110   |  6h  |    -    |   1111   |  Fh  |
-|  0111   |  7h  |    -    |   1111   |  Fh  |
-|  1000   |  8h  |    -    |   1111   |  Fh  |
-|  1001   |  9h  |    -    |   1111   |  Fh  |
-|  1010   |  Ah  |    -    |   1111   |  Fh  |
-|  1011   |  Bh  |    -    |   1111   |  Fh  |
-|  1100   |  Ch  |    -    |   1111   |  Fh  |
-|  1101   |  Dh  |    -    |   1111   |  Fh  |
-|  1110   |  Eh  |   OUT   |   1100   |  Ch  |
-|  1111   |  Fh  |    -    |   1111   |  Fh  |
-
-The address of the ROM that generates the addresses is connected to the output of the Instruction Register.
-
-The Control Block implementation in the Logisim program is as follows:
-
-![ Figure 11 ](/Pictures/Figure11.png)
-
-The 8 inverters at the bottom must be used because all the control signals used by the Logisim software are active High compared to the SAP-1 computer schematic where they are mixed.
-
-The operation of the ISAP-1 revision B version 1 computer was verified with the new Control Block.
-
-The contents of the ROM for Address generation are: \
-[ AdrROM1 ](/ROMS/AdrROM1)
-
-The contents of the Control ROM are: \
-[ CtrlROM1 ](/ROMS/CtrlROM1)
-
-## ISAP-1 Model B Version 1.1
-In the book on page 163 the authors present a method of improving the SAP-1 Computer by implementing the Variable Machine Cycle.
-
-The schematic is shown in Figure 10-17 and consists of 5 inverters and a 12-input NAND gate that generates the #NOP signal when the Control Block output has the NOP instruction encoded in Hexadecimal as 3E3h and a two-input AND gate that resets the Ring Counter when the #NOP or #CLR signal is low. 
-
-The identical implementation of this scheme in the ISAP-1 computer structure is shown in the following figure.
-
-![ Figure 12 ](/Pictures/Figure12.png)
-
-No further changes are required in the simulation structure or schematic.
-
-The functionality of the ISAP-1 Computer revision B version 1.1 has been verified with the new Control Block.
-
