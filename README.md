@@ -46,55 +46,21 @@ The Control Block receives the upper nibble of the instruction from the Instruct
 
 These 4 bits represent the instruction encoding. In the original design of the SAP-1 computer, the authors used an instruction decoder.
 
-To design this Instruction Decoder we need to create a table in which we have all the outputs depending on the inputs. This is the Truth Table for the designed decoder.
+Version 0.1 of the ISAP-1 Computer does not require an instruction decoder to function.
 
-![ Table 1 ](/Tables/Table1.png)
 
-In this Table I put all the implemented instructions on the first column. On the second column I put all the possible 4-bit codes. It represents the input to the designed Decoder.
 
-In the next four columns, the values ​​in the binary code of the input instruction are associated with the bits received at the Decoder input.
 
-The last five columns represent the binary state at the output of the Decoder.
 
-When the input presents a code of an implemented and valid instruction, we want to get one at the output, so in the last columns we put one only on the table lines where we have an implemented instruction.
 
-We count in the last columns of the table how many ones and how many zeros we have. We have one for each output and 15 zero values ​​in each column corresponding to an output.
 
-To reduce the number of logic gates used in the implementation, we choose the smaller number, i.e. 1. So the implemented decoder will output a logical one only for the 5 input codes that correspond in the table with the value 1 for each output.
 
-Since we are not interested in zero-valued outputs, we will remove from the table all lines that have only zeros in the positions in the last columns of the table.
 
-The work table now looks like this:
 
-![ Table 2 ](/Tables/Table2.png)
 
-Now each line in the table is processed separately.
 
-For example, the first line for the LDA instruction we observe that if at the input we have the binary code 0000 corresponding to the LDA instruction at the output of the Decoder only the LDA output is active.
 
-Each line in the table from an implementation point of view can be associated with an AND gate if we want an active output High or with an OR gate if we want an active output Low.
 
-In this case, we want the output to be active high so we need to use an AND gate.
-
-We need a four-input AND gate, and we will use the Truth Table for a four-input AND gate:
-
-![ Table 3 ](/Tables/Table3.png)
-
-From Table 3 it can be seen that to obtain a logical one at the output, all inputs must be logical ones.
-
-But for the LDA instruction all the inputs will be logical zero. The solution is to invert all those inputs that are zero, and the inputs that are ones are not inverted.
-
-Now we will extract from the table the Functions that control the outputs of the Decoder according to the inputs to the Decoder. We apply the rule that for each input that has a zero, that input is inverted, and inputs that have a one are not inverted.
-
-LDA = /I7 * /I6 * /I5 * /I4 \
-ADD = /I7 * /I6 * /I5 * I4 \
-SUB = /I7 * /I6 * I5 * /I4 \
-OUT = I7 * I6 * I5 * /I4 \
-HLT = I7 * I6 * I5 * I4
-
-The diagram of the described circuit made in the Logisim program is presented in figure 2.
-
-![ Figure 2 ](/Pictures/Figure2.png)
 
 In the original schematic, the authors used 5 NAND gates with 4 inputs marked C32, C33, C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
 
