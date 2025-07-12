@@ -90,25 +90,6 @@ The following Control Matrix results, which uses 4 drivers because without them 
 
 ![ Figure 25 ](/Pictures/Figure25.png)
 
+Therefore, the final structure of the Control Unit used to implement the ISAP-1 Computer version 0.1 is:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use OR gates.
-
-The final schematic obtained is identical to the original schematic of the SAP-1 computer, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
-
-![ Figure 10 ](/Pictures/Figure10.png)
-
-25 logic gates and 5 inverters are required to implement the original Control Matrix schematic for the SAP-1 computer.
+![ Figure 26 ](/Pictures/Figure26.png)
