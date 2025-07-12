@@ -17,7 +17,7 @@ https://github.com/LincaMarius/ISAP-1_Computer_Project
 
 where I build and test the functionality of the ISAP-1 computer.
 
-## ISAP-1 computer version 1.0
+## ISAP-1 computer version 0.1
 The original format of the SAP-1 computer instructions is:
 
 | 4 bits instruction code   | 4 bits operand (memory address)          |
@@ -27,28 +27,14 @@ We notice that the upper nibble is used to encode an instruction.
 So, any instruction is encoded on 4 bits. 
 Thus, we can have a maximum of 2 ^ 4 = 16 instructions.
 
-### The SAP-1 Computer Instruction Set
-The original instruction set of the SAP-1 computer is:
-
-| Mnemonic | Opcode | Operation                                  |
-|----------|--------|--------------------------------------------|
-| LDA      | 0000   | Load RAM data into Accumulator             |
-| ADD      | 0001   | Add RAM data to Accumulator                |
-| SUB      | 0010   | Substract RAM data from accumulator        |
-| OUT      | 1110   | Load Accumulator data into Output Register |
-| HLT      | 1111   | Stop processing                            |
-
-We can see that out of the 16 possible instructions, only 5 are implemented. So, we can add 11 more new instructions.
-
 The codes for unimplemented instructions are treated by the SAP-1 computer as NOP instructions.
 
 ### Control Unit Structure
 The Control Unit is built from three blocks:
-- Instruction Decoder,
 - Step Counter,
 - Control Matrix.
 
-![ Figure 1 ](/Pictures/Figure1.png)
+![ Figure 23 ](/Pictures/Figure23.png)
 
 ### Decoding the instruction
 The format of the SAP-1 Computer instructions is:
