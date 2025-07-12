@@ -101,11 +101,7 @@ The following Control Matrix results, which uses 4 drivers because without them 
 
 
 
-The equation in the left term represents the double negation which leads to the cancellation of the negation.
 
-So, the term on the right that is present in each parenthesis in our equations can be replaced with the term on the left side in the figure above.
-
-![ Figure 8 ](/Pictures/Figure8.png)
 
 If we look at De Morgan's first Theorem we notice that the term on the right is a sum of negated elements.
 
