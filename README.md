@@ -48,29 +48,14 @@ These 4 bits represent the instruction encoding. In the original design of the S
 
 Version 0.1 of the ISAP-1 Computer does not require an instruction decoder to function.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Step Counter
 For a computer to execute an instruction, it needs several steps. This is also the case for the SAP-1 computer, which needs 6 steps to execute the longest instructions.
 
 For this purpose, a Step Counter is needed. The authors of the SAP-1 Computer used a Ring Counter to count the steps taken in executing an instruction.
 
-The diagram of the described circuit made in the Logisim program is presented in figure 4.
+The diagram of the described circuit made in the Logisim program is presented in figure 24.
 
-![ Figure 4 ](/Pictures/Figure4.png)
+![ Figure 24 ](/Pictures/Figure24.png)
 
 ### Control Matrix
 Implementation of the Control Unit using Combinational Logic Circuits
