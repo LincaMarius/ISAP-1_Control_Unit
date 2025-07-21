@@ -17,7 +17,7 @@ https://github.com/LincaMarius/ISAP-1_Computer_Project
 
 where I build and test the functionality of the ISAP-1 computer.
 
-## ISAP-1 computer version 0.1
+## ISAP-1 computer version 1.0
 The original format of the SAP-1 computer instructions is:
 
 | 4 bits instruction code   | 4 bits operand (memory address)          |
