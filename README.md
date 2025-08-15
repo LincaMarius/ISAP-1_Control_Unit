@@ -71,6 +71,20 @@ To design this Instruction Decoder we need to create a table in which we have al
 
 ![ Table 7 ](/Tables/Table7.png)
 
+In this table I put all the implemented instructions on the first column. On the second column I put all the possible 4-bit codes. It represents the input to the designed Decoder.
+
+In the next four columns, the values in the binary code of the input instruction are associated with the bits received at the Decoder input.
+
+The last five columns represent the binary state at the output of the Decoder.
+
+When the input presents a code of an implemented and valid instruction, we want to get one at the output, so in the last columns we put one only on the table lines where we have an implemented instruction.
+
+Since we are not interested in zero-valued outputs, we will remove from the table all lines that have only zeros in the positions in the last columns of the table.
+
+The work table now looks like this:
+
+![ Table 8 ](/Tables/Table8.png)
+
 
 
 ### Step Counter
