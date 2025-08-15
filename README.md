@@ -327,3 +327,6 @@ Now all the equations have been modified to use only NAND gates, as you can see 
 
 The final schematic obtained is identical to the original schematic of the SAP-1 computer, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
 
+![ Figure 35 ](/Pictures/Figure35.png)
+
+25 logic gates and 1 inverter are required to implement the original Control Block diagram for the SAP-1 computer.
