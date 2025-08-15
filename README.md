@@ -85,6 +85,16 @@ The work table now looks like this:
 
 ![ Table 8 ](/Tables/Table8.png)
 
+Now the output from the table is processed separately.
+
+For example, the first line for the LDA instruction we observe that if at the input we have the binary code 0000 corresponding to the LDA instruction at the output of the Decoder only the LDA output is active.
+
+Each line in the table from an implementation point of view can be associated with an AND gate because we want an active output high.
+
+We need a four-input AND gate, and we will use the Truth Table for a four-input AND gate:
+
+![ Table 9 ](/Tables/Table9.png)
+
 
 
 ### Step Counter
