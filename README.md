@@ -297,6 +297,16 @@ The result is the following Control Matrix that uses 19 AND gates with 2 inputs,
 
 ![ Figure 31 ](/Pictures/Figure31.png)
 
+But this is not identical to that shown in the original schematic of the SAP-1 computer.
+
+The authors used NAND gates instead of AND gates in their implementation. How can we modify the schematic to use NAND gates?
+
+The solution is to use De Morgan's theorems
+
+From our equations we have obtained terms of the form (LDA * T4) which represents a two-input AND gate. But we want to use NAND gates instead of AND gates. The solution is to use a NAND gate followed by an inverter, thus preserving the previous function.
+
+![ Figure 32 ](/Pictures/Figure32.png)
+
 
 
 The following Control Matrix results, which uses 4 drivers because without them the Logisim program will show an error. The practical implementation does not require these drivers.
