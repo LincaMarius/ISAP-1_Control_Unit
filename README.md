@@ -115,6 +115,7 @@ As a result, it is necessary to invert the outputs of the NAND gates to obtain t
 
 I made the original version of the Instruction Decoder which is shown in the following figure
 
+![ Figure 29 ](/Pictures/Figure29.png)
 
 ### Step Counter
 For a computer to execute an instruction, it needs several steps. This is also the case for the SAP-1 computer, which needs 6 steps to execute the longest instructions.
