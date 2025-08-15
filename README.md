@@ -307,12 +307,9 @@ From our equations we have obtained terms of the form (LDA * T4) which represent
 
 ![ Figure 32 ](/Pictures/Figure32.png)
 
+The equation in the left term represents the double negation which leads to the cancellation of the negation.
 
+So, the term on the right that is present in each parenthesis in our equations can be replaced with the term on the left side in the figure above.
 
-The following Control Matrix results, which uses 4 drivers because without them the Logisim program will show an error. The practical implementation does not require these drivers.
+![ Figure 33 ](/Pictures/Figure33.png)
 
-![ Figure 25 ](/Pictures/Figure25.png)
-
-Therefore, the final structure of the Control Unit used to implement the ISAP-1 Computer version 0.1 is:
-
-![ Figure 26 ](/Pictures/Figure26.png)
