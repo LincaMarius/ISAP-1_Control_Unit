@@ -103,6 +103,18 @@ But for the LDA instruction all the inputs will be logical zero. The solution is
 
 ![ Figure 27 ](/Pictures/Figure27.png)
 
+The diagram of the described circuit made in the Logisim program is presented in figure 28.
+
+![ Figure 28 ](/Pictures/Figure28.png)
+
+It should be noted that in the original design of the SAP-1 computer, the authors used NAND gates. This is common in the electronics industry because it reduces the diversity of chips used by reducing the BOM (Bill of Materials).
+
+In the original scheme, the authors used 5 NAND gates with 4 inputs marked C32, C33, C34 and used the 74LS20 integrated circuit according to the Parts List which is presented in the book in Appendix 5 on page 501.
+
+As a result, it is necessary to invert the outputs of the NAND gates to obtain the correct output signals. For this purpose, the authors used 4 inverters denoted in the schematic C35 using the 74LS04 integrated circuit.
+
+I made the original version of the Instruction Decoder which is shown in the following figure
+
 
 ### Step Counter
 For a computer to execute an instruction, it needs several steps. This is also the case for the SAP-1 computer, which needs 6 steps to execute the longest instructions.
