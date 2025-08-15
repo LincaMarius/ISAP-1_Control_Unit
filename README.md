@@ -291,6 +291,10 @@ I will separate all terms containing the (*) sign which represents a two-input A
 -	EA = (OUT * T4)
 -	I/O = (OUT * T4)
 
+Starting from these equations, I created the Truth Table for the Control Matrix:
+
+![ Table 10 ](/Tables/Table10.png)
+
 Each pair of parentheses represents an AND gate. Now each signal represents the output of an OR gate with two or more inputs. If we have a single (+) sign we have a 2-input OR gate. For each (+) sign, one more input is added.
 
 The result is the following Control Matrix that uses 19 AND gates with 2 inputs, 2 OR gates with 4 inputs, 2 OR gates with 3 inputs and 2 OR gates with 2 inputs, a total of 25 logic gates.
@@ -318,3 +322,8 @@ If we look at De Morgan's first Theorem we notice that the term on the right is 
 Our equations now have negative terms added together. De Morgan's first theorem tells us that we can replace the equations with others where terms are multiplied and everything is negated.
 
 ![ Figure 34 ](/Pictures/Figure34.png)
+
+Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use OR gates.
+
+The final schematic obtained is identical to the original schematic of the SAP-1 computer, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
+
