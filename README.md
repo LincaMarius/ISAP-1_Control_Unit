@@ -63,11 +63,15 @@ The format of the SAP-1 Computer instructions is:
 | 4 bits instruction code   | 4 bits operand (memory address)          |
 |---------------------------|------------------------------------------|
 
-The Control Block receives the upper nibble of the instruction from the Instruction Register in the form of a group of 4 bits called INSTR.
+The Control Block receives the upper nibble of the instruction from the Instruction Register in the form of a group of 4 bits called "INSTR".
 
 These 4 bits represent the instruction encoding. In the original design of the SAP-1 computer, the authors used an instruction decoder.
 
-Version 0.1 of the ISAP-1 Computer does not require an instruction decoder to function.
+To design this Instruction Decoder we need to create a table in which we have all the outputs depending on the inputs. This is the Truth Table for the designed decoder.
+
+![ Table 7 ](/Tables/Table7.png)
+
+
 
 ### Step Counter
 For a computer to execute an instruction, it needs several steps. This is also the case for the SAP-1 computer, which needs 6 steps to execute the longest instructions.
