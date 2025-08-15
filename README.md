@@ -313,3 +313,8 @@ So, the term on the right that is present in each parenthesis in our equations c
 
 ![ Figure 33 ](/Pictures/Figure33.png)
 
+If we look at De Morgan's first Theorem we notice that the term on the right is a sum of negated elements.
+
+Our equations now have negative terms added together. De Morgan's first theorem tells us that we can replace the equations with others where terms are multiplied and everything is negated.
+
+![ Figure 34 ](/Pictures/Figure34.png)
