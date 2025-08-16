@@ -325,7 +325,7 @@ Our equations now have negative terms added together. De Morgan's first theorem 
 
 Now all the equations have been modified to use only NAND gates, as you can see there are no more (+) symbols in our equations, so we no longer use OR gates.
 
-The final schematic obtained is identical to the original schematic of the SAP-1 computer, except for the inversion of the control signals, because the blocks implemented in the Logisim program have positive control logic.
+The final schematic obtained is identical to the original schematic of the SAP-1 computer, except for the inversion of the control signals, because the design requires that all control signals be active high.
 
 ![ Figure 35 ](/Pictures/Figure35.png)
 
