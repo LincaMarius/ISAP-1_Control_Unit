@@ -329,4 +329,8 @@ The final schematic obtained is identical to the original schematic of the SAP-1
 
 ![ Figure 35 ](/Pictures/Figure35.png)
 
-25 logic gates and 1 inverter are required to implement the original Control Block diagram for the SAP-1 computer.
+Now we can put everything together to have the Control Block schematic for the ISAP-1 computer, which is identical to that of the SAP-1.
+
+![ Figure 36 ](/Pictures/Figure36.png)
+
+6 J-K flip-flops, 10 inverters, 7 4-input NAND gates, 2 3-input NAND gates, 21 2-input NAND gates, a total of 30 NAND logic gates are required to implement the original Control Block scheme for the SAP-1 computer.
