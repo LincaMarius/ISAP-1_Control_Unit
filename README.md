@@ -93,7 +93,7 @@ Each line in the table from an implementation point of view can be associated wi
 
 We need a four-input AND gate, and we will use the Truth Table for a four-input AND gate:
 
-![ Table 9 ](/Tables/Table9.png)
+![ Table 15 ](/Tables/Table15.png)
 
 From Table 9 it can be seen that to obtain a logical one at the output, all inputs must be logical ones.
 
