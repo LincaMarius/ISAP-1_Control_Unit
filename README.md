@@ -83,7 +83,7 @@ Since we are not interested in zero-valued outputs, we will remove from the tabl
 
 The work table now looks like this:
 
-![ Table 8 ](/Tables/Table8.png)
+![ Table 14 ](/Tables/Table14.png)
 
 Now the output from the table is processed separately.
 
