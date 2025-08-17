@@ -95,7 +95,7 @@ We need a four-input AND gate, and we will use the Truth Table for a four-input 
 
 ![ Table 15 ](/Tables/Table15.png)
 
-From Table 9 it can be seen that to obtain a logical one at the output, all inputs must be logical ones.
+From Table 15 it can be seen that to obtain a logical one at the output, all inputs must be logical ones.
 
 But for the LDA instruction all the inputs will be logical zero. The solution is to invert all those inputs that are zero, and the inputs that are ones are not inverted.
 
