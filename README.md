@@ -55,7 +55,7 @@ The Control Unit is built from three blocks:
 - Step Counter,
 - Control Matrix.
 
-![ Figure 15 ](https://github.com/LincaMarius/ISAP-1_Block_Diagram/blob/main/Pictures/Figure15.png)
+![ Figure 14 ](https://github.com/LincaMarius/ISAP-1_Block_Diagram/blob/main/Pictures/Figure14.png)
 
 ### Decoding the instruction
 The format of the SAP-1 Computer instructions is:
@@ -69,7 +69,7 @@ These 4 bits represent the instruction encoding. In the original design of the S
 
 To design this Instruction Decoder we need to create a table in which we have all the outputs depending on the inputs. This is the Truth Table for the designed decoder.
 
-![ Table 7 ](/Tables/Table7.png)
+![ Table 13 ](/Tables/Table13.png)
 
 In this table I put all the implemented instructions on the first column. On the second column I put all the possible 4-bit codes. It represents the input to the designed Decoder.
 
