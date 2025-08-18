@@ -291,9 +291,9 @@ I will separate all terms containing the (*) sign which represents a two-input A
 -	EA = (OUT * T4)
 -	I/O = (OUT * T4)
 
-Starting from these equations, I created the Truth Table for the Control Matrix:
+Starting from these equations I have created the Truth Table for the Control Matrix. This Truth Table is also obtained by joining [Table 4](https://github.com/LincaMarius/ISAP-1_Instruction_Set/blob/main/Tables/Table4.png), [Table 6](https://github.com/LincaMarius/ISAP-1_Instruction_Set/blob/main/Tables/Table6.png), [Table 8](https://github.com/LincaMarius/ISAP-1_Instruction_Set/blob/main/Tables/Table8.png) and [Table 10](https://github.com/LincaMarius/ISAP-1_Instruction_Set/blob/main/Tables/Table10.png).
 
-![ Table 10 ](/Tables/Table10.png)
+![ Table 16 ](/Tables/Table16.png)
 
 Each pair of parentheses represents an AND gate. Now each signal represents the output of an OR gate with two or more inputs. If we have a single (+) sign we have a 2-input OR gate. For each (+) sign, one more input is added.
 
